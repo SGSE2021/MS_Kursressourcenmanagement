@@ -9,5 +9,6 @@ router.put('/appointment/:id', AppointmentsCtrl.updateAppointment)
 router.delete('/appointment/:id', AppointmentsCtrl.deleteAppointment)
 router.get('/appointment/:id', AppointmentsCtrl.getAppointmentById)
 router.get('/appointments', AppointmentsCtrl.getAppointments)
+router.get('/appointmentsOfCourse/:course', AppointmentsCtrl.getAppointmentsOfCourse)
 
 module.exports = router

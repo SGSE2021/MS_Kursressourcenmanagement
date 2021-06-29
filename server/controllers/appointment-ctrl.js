@@ -114,10 +114,26 @@ getAppointments = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+getAppointmentsOfCourse = async (req, res) => {
+    await Appointment.find({ course: req.params.course }, (err, appointment) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!appointment) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Appointment not found` })
+        }
+        return res.status(200).json({ success: true, data: appointment })
+    }).catch(err => console.log(err))
+}
+
 module.exports = {
     createAppointment,
     updateAppointment,
     deleteAppointment,
     getAppointments,
     getAppointmentById,
+    getAppointmentsOfCourse,
 }
