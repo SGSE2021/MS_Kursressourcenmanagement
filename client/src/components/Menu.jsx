@@ -18,6 +18,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { AppointmentOverview } from '../pages';
+import {CreateAppointment} from '../components'
 
 const drawerWidth = 240;
 
@@ -163,6 +164,7 @@ function Menu(props) {
         <Router>
           <Switch>
             <Route path="/courses/:id/appointments" exact component={AppointmentOverview} />
+            <Route path="/courses/:id/appointments/create" exact component={CreateAppointment} />
           </Switch>
         </Router>
 
