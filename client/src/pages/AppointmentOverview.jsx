@@ -4,11 +4,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Divider } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import styled from 'styled-components'
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 
 import ButtonMenu from '../components/AppointmentsButtonMenu'
@@ -24,7 +24,7 @@ const Overview = styled.div.attrs({
     className: 'Overview',
 })`
     display: flex;
-    width: 70%;
+    width: 85%;
 `
 
 class AppointmentOverview extends Component {
@@ -34,7 +34,7 @@ class AppointmentOverview extends Component {
         this.state = {
             id: this.props.match.params.id,
             appointments: [],
-            userRole: "student",
+            userRole: "prof",
         }
     }
 
@@ -43,7 +43,7 @@ class AppointmentOverview extends Component {
         const appointments = await api.getAppointmentsOfCourse(id)
         const appointmentsArray = []
         appointments.data.data.forEach((e) => {
-            appointmentsArray.push({id: e._id, name: e.name, date: e.data})
+            appointmentsArray.push({id: e._id, name: e.name, date: e.date})
         })
 
         this.setState({
@@ -55,7 +55,11 @@ class AppointmentOverview extends Component {
         const { id, appointments, userRole } = this.state
         
         const handleClick = (e, data) => {
-            alert(`Clicked on menu ${data.item} ${data.id}`);
+            if(data.item === "löschen"){
+                console.log("löschen")
+            }else{
+                console.log("bearbeiten")
+            }
         };
         
         if(userRole == "student") {
@@ -71,7 +75,7 @@ class AppointmentOverview extends Component {
                             )}
                         </List>
                     </Overview>
-                    <ButtonMenu> 
+                    <ButtonMenu courseid={id}> 
                     </ButtonMenu>
                 </Container>
             )
@@ -103,10 +107,9 @@ class AppointmentOverview extends Component {
                                     </ContextMenu>
                                 </ListItem>
                             )}
-                            
                         </List>
                     </Overview>
-                    <ButtonMenu> 
+                    <ButtonMenu courseid={id}> 
                     </ButtonMenu>
                 </Container>
             )
