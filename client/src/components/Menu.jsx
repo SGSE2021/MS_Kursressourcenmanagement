@@ -17,7 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { AppointmentOverview } from '../pages';
+import { AppointmentOverview, MembersOverview } from '../pages';
 import {CreateAppointment} from '../components'
 
 const drawerWidth = 240;
@@ -132,7 +132,10 @@ function Menu(props) {
           <Typography variant="h6" noWrap className={classes.menuTitle}>
             Kurse
           </Typography>
-          <div className={classes.profileDiv}><AccountCircleIcon className={classes.profileButton}></AccountCircleIcon><p>Dominik Löwen</p></div>
+          <div className={classes.profileDiv}>
+              <AccountCircleIcon className={classes.profileButton}></AccountCircleIcon>
+              <p>Dominik Löwen</p>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -165,6 +168,7 @@ function Menu(props) {
           <Switch>
             <Route path="/courses/:id/appointments" exact component={AppointmentOverview} />
             <Route path="/courses/:id/appointments/create" exact component={CreateAppointment} />
+            <Route path="/courses/:id/members" exact component={MembersOverview} />
           </Switch>
         </Router>
 
