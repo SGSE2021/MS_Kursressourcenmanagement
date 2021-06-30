@@ -51,6 +51,15 @@ class AppointmentOverview extends Component {
         })
     }
 
+    deleteAppointment = async (event, data) => {
+        if (
+            window.confirm("Termin wirklich löschen?")
+        ){
+            window.location.reload()
+            await api.deleteAppointment(data.id)
+        }
+    }
+
     render() {
         const { id, appointments, userRole } = this.state
         
@@ -99,7 +108,7 @@ class AppointmentOverview extends Component {
                                             Bearbeiten
                                         </MenuItem>
                                         <MenuItem
-                                        onClick={handleClick}
+                                        onClick={this.deleteAppointment}
                                         data={{item: "löschen", id: obj.id}}
                                         className="menuItem">
                                             Löschen
