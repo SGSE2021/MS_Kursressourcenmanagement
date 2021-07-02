@@ -23,8 +23,8 @@ const Container = styled.div.attrs({
 const Overview = styled.div.attrs({
     className: 'Overview',
 })`
-    display: flex;
-    width: 85%;
+    width: 82%;
+    margin-right: 3%;
 `
 
 class AppointmentOverview extends Component {
