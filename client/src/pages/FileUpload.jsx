@@ -1,49 +1,48 @@
-import React, { Component, useState } from 'react'
-import api from '../api'
-import styled from 'styled-components'
-import FileUploader from '../components/UploadFiles'
-import {DropzoneArea} from 'material-ui-dropzone'
-const FormData = require('form-data');
+import React, { Component, useState } from "react";
+import api from "../api";
+import styled from "styled-components";
+import FileUploader from "../components/UploadFiles";
+import { DropzoneArea } from "material-ui-dropzone";
+import axios from "axios";
+const FormData = require("form-data");
 
 const Container = styled.div.attrs({
-    className: 'container',
+	className: "container",
 })`
-    display: flex;
-    flex-wrap: wrap;
-`
+	display: flex;
+	flex-wrap: wrap;
+`;
 
-function FileUpload (props) {
-    const [selectedFile, setSelectedFile] = useState(null)
+function FileUpload(props) {
+	const [selectedFile, setSelectedFile] = useState(null);
 
-    const submitForm = async (e) => {
-        e.preventDefault()
-        // var formData = new FormData();
-        // // formData.append("filename", selectedFile.name)
-        // formData.append("files", selectedFile, selectedFile.name);
-        
-        const data = new FormData() 
-        data.append('file', selectedFile)
-        data.append("myfile", selectedFile, selectedFile.name);
+	const submitForm = async (e) => {
+		e.preventDefault();
 
-        console.log(selectedFile)
-        console.log(data)
+		const formData = new FormData();
+		formData.append("myFile", selectedFile, selectedFile.name);
 
-        const { data:responsedata } = await api.uploadRessource(props.match.params.id, data)
-        console.log(responsedata.success)
-    };
+		console.log(formData.get("myFile"));
+		const { data: responseData } = await axios({
+			method: "post",
+			url: "http://localhost:3000/test",
+			data: formData,
+			headers: { "Content-Type": "multipart/form-data" },
+		});
 
-    return (
-        <Container>
-            <form>
-                <DropzoneArea
-                  onChange={this.handleChange.bind(this)}
-                />
-                <FileUploader onFileSelect={(file) => setSelectedFile(file)}>
-                </FileUploader>
-                <button onClick={(e) => submitForm(e)} >Speichern</button>
-            </form>
-        </Container>
-    )
+		console.log(responseData);
+	};
+
+	return (
+		<Container>
+			<form>
+				<FileUploader onFileSelect={(file) => setSelectedFile(file)} />
+				<button disabled={!selectedFile} onClick={(e) => submitForm(e)}>
+					Hochladen
+				</button>
+			</form>
+		</Container>
+	);
 }
 
-export default FileUpload
+export default FileUpload;
