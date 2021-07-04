@@ -23,8 +23,8 @@ const Container = styled.div.attrs({
 const Overview = styled.div.attrs({
     className: 'Overview',
 })`
-    display: flex;
-    width: 85%;
+    width: 82%;
+    margin-right: 3%;
 `
 
 class AppointmentOverview extends Component {
@@ -49,6 +49,15 @@ class AppointmentOverview extends Component {
         this.setState({
             appointments: appointmentsArray
         })
+    }
+
+    deleteAppointment = async (event, data) => {
+        if (
+            window.confirm("Termin wirklich löschen?")
+        ){
+            window.location.reload()
+            await api.deleteAppointment(data.id)
+        }
     }
 
     render() {
@@ -99,7 +108,7 @@ class AppointmentOverview extends Component {
                                             Bearbeiten
                                         </MenuItem>
                                         <MenuItem
-                                        onClick={handleClick}
+                                        onClick={this.deleteAppointment}
                                         data={{item: "löschen", id: obj.id}}
                                         className="menuItem">
                                             Löschen

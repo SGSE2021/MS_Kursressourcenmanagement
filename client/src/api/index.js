@@ -10,6 +10,9 @@ export const updateAppointment = (id, payload) => api.put(`/appointment/${id}`, 
 export const deleteAppointment = id => api.delete(`/appointment/${id}`)
 export const getAppointmentById = id => api.get(`/appointment/${id}`)
 export const getAppointmentsOfCourse = name => api.get(`/appointmentsOfCourse/${name}`)
+export const uploadRessource = (name, payload) => api.post(`/ressources/${name}`,  {content: payload})
+export const getRessource = name => api.get(`/ressources/${name}`)
+
 
 const apis = {
     createAppointment,
@@ -18,6 +21,8 @@ const apis = {
     deleteAppointment,
     getAppointmentById,
     getAppointmentsOfCourse,
+    uploadRessource,
+    getRessource,
 }
 
 export default apis
