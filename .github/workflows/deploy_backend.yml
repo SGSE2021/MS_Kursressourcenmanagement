@@ -9,10 +9,10 @@ on:
   workflow_dispatch:
   
 env:
-  IMAGE_NAME: kursressourcen
-  SERVICE_NAME: kursressourcen
-  DOCKERFILE: ./Dockerfile
-  MANIFESTFILE: ./manifests/kursressourcen.yaml
+  IMAGE_NAME: kursressourcen_backend
+  SERVICE_NAME: kursressourcen_backend
+  DOCKERFILE: ./server/Dockerfile
+  MANIFESTFILE: ./manifests/kursressourcen_backend.yaml
 
 jobs:
   build:
