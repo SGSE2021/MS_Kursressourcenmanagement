@@ -11,7 +11,7 @@ const FileUploader = ({ onFileSelect }) => {
 
 	return (
 		<div>
-			<input type="file" onChange={handleFileInput} name="upload" />
+			<input type="file" onChange={handleFileInput} name="file" />
 			<Button onClick={(e) => fileInput.current && fileInput.current.click()}>
 				Wählen
 			</Button>

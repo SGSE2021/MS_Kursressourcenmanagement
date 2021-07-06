@@ -20,15 +20,22 @@ function FileUpload(props) {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("myFile", selectedFile, selectedFile.name);
+		formData.append("file", selectedFile); // , selectedFile.name
+		
+		console.log(formData.get("file"));
 
-		console.log(formData.get("myFile"));
-		const { data: responseData } = await axios({
-			method: "post",
-			url: "http://localhost:3000/test",
-			data: formData,
-			headers: { "Content-Type": "multipart/form-data" },
-		});
+		const { data: responseData } = await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+
+		// const { data: responseData } = await axios({
+		// 	method: "post",
+		// 	url: "http://localhost:3000/test",
+		// 	data: formData,
+		// 	headers: { "Content-Type": "multipart/form-data" },
+		// });
 
 		console.log(responseData);
 	};
