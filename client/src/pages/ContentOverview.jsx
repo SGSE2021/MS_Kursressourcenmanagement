@@ -87,6 +87,9 @@ class ContentOverview extends Component {
             zIndex: 1,
             border: "1px solid"
         }
+        const iconstyle = {
+            fontSize: "3.5em"
+        }
 
         return (
             <Container>
@@ -98,7 +101,7 @@ class ContentOverview extends Component {
                                 <div style={styleFullWidth}>
                                     <ContextMenuTrigger id={obj.id}>
                                         <ContextContainer>
-                                            <DescriptionIcon></DescriptionIcon>
+                                            <DescriptionIcon style={iconstyle}></DescriptionIcon>
                                             <ListItemText primary={obj.filename} secondary={obj.size}/>
                                             <div ><MoreVertIcon></MoreVertIcon></div>
                                         </ContextContainer>

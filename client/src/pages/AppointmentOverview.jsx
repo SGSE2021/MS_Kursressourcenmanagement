@@ -90,7 +90,11 @@ class AppointmentOverview extends Component {
             zIndex: 1,
             border: "1px solid"
         }
-        
+        const iconstyle = {
+            fontSize: "2.5em"
+        }
+
+
         if(userRole == "student") {
             return (
                 <Container>
@@ -118,7 +122,7 @@ class AppointmentOverview extends Component {
                                     <div style={styleFullWidth}>
                                         <ContextMenuTrigger id={obj.id}>
                                             <ContextContainer>
-                                                <InfoIcon></InfoIcon>
+                                                <InfoIcon style={iconstyle}></InfoIcon>
                                                 <ListItemText primary={obj.name + ", Zeitpunk: " + obj.date} />
                                                 <div className="hight"><MoreVertIcon></MoreVertIcon></div>
                                             </ContextContainer>
