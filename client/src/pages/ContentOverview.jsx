@@ -87,9 +87,6 @@ class ContentOverview extends Component {
             zIndex: 1,
             border: "1px solid"
         }
-        const dividerStyle = {
-            color: "black"
-        }
 
         return (
             <Container>
@@ -110,8 +107,7 @@ class ContentOverview extends Component {
                                         <MenuItem
                                         onClick={this.handleDelete}
                                         data={{item: "löschen", id: obj.id}}
-                                        className="menuItem"
-                                        style={menuItemStyle}>
+                                        className="menuItem">
                                             Löschen
                                         </MenuItem>
                                         <Divider></Divider>
