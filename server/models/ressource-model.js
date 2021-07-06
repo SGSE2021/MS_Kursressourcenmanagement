@@ -6,7 +6,11 @@ const ressourceSchema = new Schema({
     course: String,
     file: {
         data: Buffer,
-        contentType: String
+        mimetype: String,
+        size: Number,
+        encoding: String,
+        name: String,
+        md5: String,
     }
 });
 
