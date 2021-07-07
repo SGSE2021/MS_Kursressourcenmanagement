@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker,  } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import 'date-fns';
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
 

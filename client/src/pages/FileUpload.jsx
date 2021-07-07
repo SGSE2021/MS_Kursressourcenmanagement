@@ -1,8 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import api from "../api";
 import styled from "styled-components";
 import FileUploader from "../components/UploadFiles";
-import { DropzoneArea } from "material-ui-dropzone";
 import axios from "axios";
 const FormData = require("form-data");
 
@@ -20,22 +19,13 @@ function FileUpload(props) {
 		e.preventDefault();
 	
 		const formData = new FormData();
-		formData.append("file", selectedFile); // , selectedFile.name
+		formData.append("file", selectedFile);
 		
-		const { data: responseData } = await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
+		await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           });
-
-		// const { data: responseData } = await axios({
-		// 	method: "post",
-		// 	url: "http://localhost:3000/test",
-		// 	data: formData,
-		// 	headers: { "Content-Type": "multipart/form-data" },
-		// });
-
-		console.log(responseData);
 	};
 
 	return (

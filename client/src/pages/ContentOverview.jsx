@@ -52,8 +52,6 @@ class ContentOverview extends Component {
 
         var ressourceArray = []
 
-        console.log(res.data.data)
-
         res.data.data.forEach((e) => {
             ressourceArray.push({filename: e.filename, id: e._id, file: e.file, size: (e.size / 1000) + " KB"})
         })
@@ -66,7 +64,6 @@ class ContentOverview extends Component {
     handleDelete = async (event, data) => {
         if (window.confirm("Termin wirklich löschen?")){
             window.location.reload()
-            console.log(data.id)
             await api.deleteRessource(data.id)
         }
     };
@@ -76,7 +73,6 @@ class ContentOverview extends Component {
         .then((response) => {
             const content = new Buffer.from(response.data.data.file).toString()
             var f = new File([content], response.data.data.filename, {type: response.data.data.mimetype})
-            console.log(f)
 
             const url = window.URL.createObjectURL(f)
             const link = document.createElement('a')

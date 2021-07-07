@@ -70,8 +70,7 @@ class FindCourseOverview extends Component {
     }
 
     render() {
-        const {courses, majors, selectedMajor, filteredCourses} = this.state
-        
+        const {majors, selectedMajor, filteredCourses} = this.state
         
         const styleFullWidth = {
             width: "100%",
@@ -158,7 +157,6 @@ class FindCourseOverview extends Component {
                                 </ListItem>
                             )}
                         </div>
-                        
                     )}
                  </List>
             </Container>

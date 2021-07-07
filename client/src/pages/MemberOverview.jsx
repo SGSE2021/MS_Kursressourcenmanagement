@@ -43,7 +43,6 @@ const ProfileIcon = styled.div.attrs({
     font-size: 6em;
     margin-left: auto;
     margin-right: auto;
-
 `
 
 class MembersOverview extends Component {

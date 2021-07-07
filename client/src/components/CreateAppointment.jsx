@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import api from '../api'
-
 import styled from 'styled-components'
-
 import TextField from '@material-ui/core/TextField';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker,  } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker,  } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import 'date-fns';
+
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
 
@@ -71,7 +69,7 @@ class CreateAppointment extends Component {
     }
 
     render() {
-        const { name, date, course } = this.state
+        const { course } = this.state
 
         if(this.state.userRole === "prof"){
             return (
@@ -97,7 +95,6 @@ class CreateAppointment extends Component {
         }else{
             <Container>Keine Rechte für Studenten</Container>
         }
-        
     }
 }
 

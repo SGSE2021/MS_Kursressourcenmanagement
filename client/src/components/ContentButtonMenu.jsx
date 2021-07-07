@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     buttonMenu: {
         width: '15%',
     },
@@ -37,7 +37,6 @@ function ContentButtonMenu(props) {
             </div>
         )
     }
-    
 }
 
 export default ContentButtonMenu;

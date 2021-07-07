@@ -14,5 +14,4 @@ export {
     CourseOverview,
     MyCoursesOverview,
     FindCourseOverview,
-
 }
