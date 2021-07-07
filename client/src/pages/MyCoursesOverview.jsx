@@ -113,10 +113,10 @@ class MyCoursesOverview extends Component {
                                         </ContextMenuTrigger>
                                         <ContextMenu className="contextMenu" id={c.id} style={menuStyle}>
                                         <MenuItem
-                                            onClick={this.handleEntry}
+                                            onClick={this.handleExit}
                                             data={{item: "austreten", id: c.id}}
                                             className="menuItem">
-                                                Beitreten
+                                                Austreten
                                             </MenuItem>
                                         </ContextMenu>
                                     </div></a>
