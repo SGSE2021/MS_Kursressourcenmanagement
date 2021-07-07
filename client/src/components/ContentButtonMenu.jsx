@@ -21,19 +21,19 @@ function ContentButtonMenu(props) {
     if(userRole === "student"){
         return (
             <div className={classes.buttonMenu}>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid}>Inhalt</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid + "/appointments"}>Termine</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid + "/members"}>Mitglieder</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid + "/leave"}>Austreten</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid}>Inhalt</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/appointments"}>Termine</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/members"}>Mitglieder</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/leave"}>Austreten</Button>
             </div>
         )
     } else {
         return (
             <div className={classes.buttonMenu}>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid}>Inhalt</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid + "/appointments"}>Termine</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid + "/members"}>Mitglieder</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/" + props.courseid + "/upload"}>Datei hochladen</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid}>Inhalt</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/appointments"}>Termine</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/members"}>Mitglieder</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/upload"}>Datei hochladen</Button>
             </div>
         )
     }
