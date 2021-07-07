@@ -18,12 +18,10 @@ function FileUpload(props) {
 
 	const submitForm = async (e) => {
 		e.preventDefault();
-
+	
 		const formData = new FormData();
 		formData.append("file", selectedFile); // , selectedFile.name
 		
-		console.log(formData.get("file"));
-
 		const { data: responseData } = await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",

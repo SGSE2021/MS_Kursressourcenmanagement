@@ -31,7 +31,6 @@ deleteRessource = async (req, res) => {
 }
 
 getRessourceById = async (req, res) => {
-	console.log(req.params.id)
 	await Ressource.findOne({ _id: req.params.id }, (err, ressource) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
