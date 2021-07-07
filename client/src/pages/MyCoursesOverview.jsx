@@ -87,6 +87,13 @@ class MyCoursesOverview extends Component {
             zIndex: 1,
             border: "1px solid",
         }
+        const linkStyle = {
+            color: "black",
+            textDecoration: "none",
+            padding: 0,
+            margin: 0,
+            width: "100%",
+        }
 
         return (
             <Container>
@@ -97,7 +104,7 @@ class MyCoursesOverview extends Component {
                             {obj.data.map(c => 
                                 <ListItem button 
                                 key={c.id}>
-                                    <div style={styleFullWidth}>
+                                    <a style={linkStyle} href={"/courses/course/" + c.id}><div style={styleFullWidth}>
                                         <ContextMenuTrigger id={c.id}>
                                             <ContextContainer>
                                                 <ListItemText primary={c.name + " - " + c.dozent + " - " + c.semester}/>
@@ -112,7 +119,7 @@ class MyCoursesOverview extends Component {
                                                 Beitreten
                                             </MenuItem>
                                         </ContextMenu>
-                                    </div>
+                                    </div></a>
                                 </ListItem>
                             )}
                         </div>
