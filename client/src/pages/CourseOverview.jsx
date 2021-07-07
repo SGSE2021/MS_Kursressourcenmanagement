@@ -26,14 +26,10 @@ class CourseOverview extends Component {
         this.state = {
             id: this.props.match.params.id,
             showComponent: 1,
-            courses: [],
         }
     }
 
     componentDidMount = async () => {
-        const { id } = this.state
-        
-        // TODO: get courselist of user 
     }
 
     handleClick(e, data) {
