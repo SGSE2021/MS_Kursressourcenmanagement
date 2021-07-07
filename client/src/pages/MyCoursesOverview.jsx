@@ -46,13 +46,34 @@ class MyCoursesOverview extends Component {
             {id: "BE", dozent: "Danzebrink", semester: "Sommersemester 2021", name: "Business Engineering und IT-Projektmanagement"},
         ]
 
+        const sortedCourses = this.sortAndGroupCourses(courseArray)
         this.setState({
-            courses: courseArray
+            courses: sortedCourses
         })
     }
 
     handleExit (event, data) {
+        event.preventDefault()
         console.log("Austreten aus Kurs: " + data.id)
+    }
+
+    sortAndGroupCourses(courseArray) {
+        const courses = courseArray
+        var result = [], i = 0, val, index, values = []
+        
+        for(; i < courses.length; i++){
+            val = courses[i].semester
+            index = values.indexOf(val)
+
+            if (index > -1) {
+                result[index].data.push(courses[i]);
+            } else {
+                values.push(val);
+                result.push({semester: val, data: [courses[i]]});
+            }
+        }
+
+        return result
     }
 
     render() {
@@ -66,54 +87,36 @@ class MyCoursesOverview extends Component {
             zIndex: 1,
             border: "1px solid",
         }
-        const menuItemStyle = {
-            padding: "5px",
-            margin: 0,
-            width: "6em"
-        }
-
-        const linkStyle = {
-            color: "black",
-            textDecoration: "none",
-            padding: 0,
-            margin: 0
-        }
 
         return (
             <Container>
                 <List component="nav" aria-label="courses">
                     {courses.map(obj => 
-                        <ListItem button 
-                        key={obj.id}>
-                            <div style={styleFullWidth}>
-                                <ContextMenuTrigger id={obj.id}>
-                                    <ContextContainer>
-                                        <ListItemText primary={obj.name + " - " + obj.dozent + " - " + obj.semester}/>
-                                        <div ><MoreVertIcon></MoreVertIcon></div>
-                                    </ContextContainer>
-                                </ContextMenuTrigger>
-                                <ContextMenu className="contextMenu" id={obj.id} style={menuStyle}>
-                                    <MenuItem
-                                    onClick={this.handleExit}
-                                    data={{item: "austreten", id: obj.id}}
-                                    className="menuItem">
-                                        <p style={menuItemStyle}>
-                                            Austreten
-                                        </p>
-                                    </MenuItem>
-                                    <Divider></Divider>
-                                    <MenuItem
-                                    data={{item: "oeffnen", id: obj.id}}
-                                    className="menuItem">
-                                        <a style={linkStyle} href={"/courses/course/" + obj.id}>
-                                            <p style={menuItemStyle}>
-                                                Öffnen
-                                            </p>
-                                        </a>
-                                    </MenuItem>
-                                </ContextMenu>
-                            </div>
-                        </ListItem>
+                        <div key={obj.semester}>
+                            <h3>{obj.semester}</h3>
+                            {obj.data.map(c => 
+                                <ListItem button 
+                                key={c.id}>
+                                    <div style={styleFullWidth}>
+                                        <ContextMenuTrigger id={c.id}>
+                                            <ContextContainer>
+                                                <ListItemText primary={c.name + " - " + c.dozent + " - " + c.semester}/>
+                                                <div ><MoreVertIcon></MoreVertIcon></div>
+                                            </ContextContainer>
+                                        </ContextMenuTrigger>
+                                        <ContextMenu className="contextMenu" id={c.id} style={menuStyle}>
+                                        <MenuItem
+                                            onClick={this.handleEntry}
+                                            data={{item: "austreten", id: c.id}}
+                                            className="menuItem">
+                                                Beitreten
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </div>
+                                </ListItem>
+                            )}
+                        </div>
+                        
                     )}
                  </List>
             </Container>
