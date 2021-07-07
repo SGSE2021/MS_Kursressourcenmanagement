@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import api from '../api'
 import styled from 'styled-components'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { Button } from '@material-ui/core';
 import { MyCoursesOverview, FindCourseOverview } from '../pages'
 
@@ -13,6 +9,7 @@ const Container = styled.div.attrs({
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-left: 1em;
 `
 
 const Overview = styled.div.attrs({
@@ -21,7 +18,6 @@ const Overview = styled.div.attrs({
     width: 100%;
     margin-top: 1.5em;
 `
-
 
 class CourseOverview extends Component {
     constructor(props) {
@@ -37,6 +33,7 @@ class CourseOverview extends Component {
     componentDidMount = async () => {
         const { id } = this.state
         
+        // TODO: get courselist of user 
     }
 
     handleClick(e, data) {
@@ -45,14 +42,12 @@ class CourseOverview extends Component {
         } else {
             this.setState({showComponent: 1})
         }
-        
     }
 
     render() {
         const buttonstyle = {
             marginRight: "0.5em",
         }
-
 
         return (
             <Container>
