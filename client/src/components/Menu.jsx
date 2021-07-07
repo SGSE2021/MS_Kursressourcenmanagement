@@ -17,8 +17,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { AppointmentOverview, ContentOverview, MembersOverview, FileUpload } from '../pages';
+import { AppointmentOverview, ContentOverview, MembersOverview, FileUpload, CourseOverview } from '../pages';
 import {CreateAppointment} from '../components'
+
 
 const drawerWidth = 240;
 
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
           alignItems: 'center',
           fontSize: '14px',
     }
-}
+  }
 }));
 
 function Menu(props) {
@@ -166,11 +167,12 @@ function Menu(props) {
         <div className={classes.drawerHeader} />
         <Router>
           <Switch>
-            <Route path="/courses/:id/appointments" exact component={AppointmentOverview} />
-            <Route path="/courses/:id/appointments/create" exact component={CreateAppointment} />
-            <Route path="/courses/:id/members" exact component={MembersOverview} />
-            <Route path="/courses/:id/" exact component={ContentOverview} />
-            <Route path="/courses/:id/upload" exact component={FileUpload} />
+            <Route path="/courses" exact component={CourseOverview}/>
+            <Route path="/courses/course/:id/appointments" exact component={AppointmentOverview} />
+            <Route path="/courses/course/:id/appointments/create" exact component={CreateAppointment} />
+            <Route path="/courses/course/:id/members" exact component={MembersOverview} />
+            <Route path="/courses/course/:id/" exact component={ContentOverview} />
+            <Route path="/courses/course/:id/upload" exact component={FileUpload} />
           </Switch>
         </Router>
 

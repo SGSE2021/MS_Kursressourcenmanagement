@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Divider } from '@material-ui/core';
-import { Button } from '@material-ui/core';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
@@ -25,6 +24,17 @@ const Overview = styled.div.attrs({
 })`
     width: 82%;
     margin-right: 3%;
+`
+
+const ContextContainer = styled.div.attrs({
+    className: "ContextContainer",
+})`
+    display: flex;
+    width: 100%;
+
+    div: {
+        align-items: right;
+    }
 `
 
 class AppointmentOverview extends Component {
@@ -68,9 +78,23 @@ class AppointmentOverview extends Component {
                 console.log("löschen")
             }else{
                 console.log("bearbeiten")
+                console.log(data)
             }
         };
-        
+
+        const styleFullWidth = {
+            width: "100%",
+        }
+        const menuItemStyle = {
+            background: "#ededef",
+            zIndex: 1,
+            border: "1px solid"
+        }
+        const iconstyle = {
+            fontSize: "2.5em"
+        }
+
+
         if(userRole == "student") {
             return (
                 <Container>
@@ -95,25 +119,30 @@ class AppointmentOverview extends Component {
                         <List component="nav" aria-label="appointments">
                             {appointments.map(obj => 
                                 <ListItem button key={obj.id}>
-                                    <InfoIcon></InfoIcon>
-                                    <ListItemText primary={obj.name + ", Zeitpunk: " + obj.date} />
-                                    <ContextMenuTrigger id={obj.id}>
-                                        <div className="hight"><MoreVertIcon></MoreVertIcon></div>
-                                    </ContextMenuTrigger>
-                                    <ContextMenu className="contextMenu" id={obj.id}>
-                                        <MenuItem
-                                        onClick={handleClick}
-                                        data={{item: "Bearbeiten", id: obj.id}}
-                                        className="menuItem">
-                                            Bearbeiten
-                                        </MenuItem>
-                                        <MenuItem
-                                        onClick={this.deleteAppointment}
-                                        data={{item: "löschen", id: obj.id}}
-                                        className="menuItem">
-                                            Löschen
-                                        </MenuItem>
-                                    </ContextMenu>
+                                    <div style={styleFullWidth}>
+                                        <ContextMenuTrigger id={obj.id}>
+                                            <ContextContainer>
+                                                <InfoIcon style={iconstyle}></InfoIcon>
+                                                <ListItemText primary={obj.name + ", Zeitpunk: " + obj.date} />
+                                                <div className="hight"><MoreVertIcon></MoreVertIcon></div>
+                                            </ContextContainer>
+                                        </ContextMenuTrigger>
+                                        <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
+                                            <MenuItem
+                                            onClick={handleClick}
+                                            data={{item: "Bearbeiten", id: obj.id}}
+                                            className="menuItem">
+                                                Bearbeiten
+                                            </MenuItem>
+                                            <Divider></Divider>
+                                            <MenuItem
+                                            onClick={this.deleteAppointment}
+                                            data={{item: "löschen", id: obj.id}}
+                                            className="menuItem">
+                                                Löschen
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </div>
                                 </ListItem>
                             )}
                         </List>

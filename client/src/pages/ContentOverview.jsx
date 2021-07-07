@@ -7,6 +7,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DescriptionIcon from '@material-ui/icons/Description';
+import { Divider } from '@material-ui/core';
+
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -22,6 +25,17 @@ const Overview = styled.div.attrs({
     margin-right: 3%;
 `
 
+const ContextContainer = styled.div.attrs({
+    className: "ContextContainer",
+})`
+    display: flex;
+    width: 100%;
+
+    div: {
+        align-items: right;
+    }
+`
+
 class ContentOverview extends Component {
     constructor(props) {
         super(props)
@@ -34,61 +48,96 @@ class ContentOverview extends Component {
 
     componentDidMount = async () => {
         const { id } = this.state
-        const res = await api.getRessource(id)
+        const res = await api.getRessources(id)
+
+        var ressourceArray = []
 
         console.log(res.data.data)
 
-        const ressources = [
-            {id: "1", filename: "Test.txt", course: "SGSE"},
-            {id: "2", filename: "aufgabe1.pdf", course: "SGSE"},
-            {id: "3", filename: "aufgabe2.pdf", course: "SGSE"},
-            {id: "4", filename: "aufgabe3.pdf", course: "SGSE"},
-            {id: "5", filename: "aufgabe4.pdf", course: "SGSE"},
-            {id: "6", filename: "aufgabe5.pdf", course: "SGSE"},
-            {id: "7", filename: "aufgabe6.pdf", course: "SGSE"},
-            {id: "8", filename: "aufgabe7.pdf", course: "SGSE"},
-        ]
+        res.data.data.forEach((e) => {
+            ressourceArray.push({filename: e.filename, id: e._id, file: e.file, size: (e.size / 1000) + " KB"})
+        })
 
         this.setState({
-            ressources: ressources
+            ressources: ressourceArray
         })
+    }
+
+    handleDelete = async (event, data) => {
+        if (window.confirm("Termin wirklich löschen?")){
+            window.location.reload()
+            console.log(data.id)
+            await api.deleteRessource(data.id)
+        }
+    };
+
+    handleDownload = async (event, data) => {
+        await api.getRessourceById(data.id)
+        .then((response) => {
+            const content = new Buffer.from(response.data.data.file).toString()
+            var f = new File([content], response.data.data.filename, {type: response.data.data.mimetype})
+            console.log(f)
+
+            const url = window.URL.createObjectURL(f)
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', f.name)
+
+            document.body.appendChild(link)
+            link.click()
+            link.parentNode.removeChild(link)
+        })
+
+        event.preventDefault()
     }
 
     render() {
         const { id, ressources } = this.state
 
-        const handleClick = (e, data) => {
-            if(data.item === "löschen"){
-                console.log("löschen")
-            }else{
-                console.log("bearbeiten")
-            }
-        };
+        const styleFullWidth = {
+            width: "100%",
+        }
+        const menuItemStyle = {
+            background: "#ededef",
+            zIndex: 1,
+            border: "1px solid"
+        }
+        const iconstyle = {
+            fontSize: "3.5em"
+        }
 
         return (
             <Container>
                 <Overview> 
                     <List component="nav" aria-label="appointments">
                         {ressources.map(obj => 
-                            <ListItem button key={obj.id}>
-                                <ListItemText primary={obj.filename} />
-                                <ContextMenuTrigger id={obj.id}>
-                                    <div className="hight"><MoreVertIcon></MoreVertIcon></div>
-                                </ContextMenuTrigger>
-                                <ContextMenu className="contextMenu" id={obj.id}>
-                                    <MenuItem
-                                    onClick={handleClick}
-                                    data={{item: "Bearbeiten", id: obj.id}}
-                                    className="menuItem">
-                                        Bearbeiten
-                                    </MenuItem>
-                                    <MenuItem
-                                    onClick={this.deleteAppointment}
-                                    data={{item: "löschen", id: obj.id}}
-                                    className="menuItem">
-                                        Löschen
-                                    </MenuItem>
-                                </ContextMenu>
+                            <ListItem button 
+                            key={obj.id}>
+                                <div style={styleFullWidth}>
+                                    <ContextMenuTrigger id={obj.id}>
+                                        <ContextContainer>
+                                            <DescriptionIcon style={iconstyle}></DescriptionIcon>
+                                            <ListItemText primary={obj.filename} secondary={obj.size}/>
+                                            <div ><MoreVertIcon></MoreVertIcon></div>
+                                        </ContextContainer>
+                                    </ContextMenuTrigger>
+                                    <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
+                                        <MenuItem
+                                        onClick={this.handleDelete}
+                                        data={{item: "löschen", id: obj.id}}
+                                        className="menuItem">
+                                            Löschen
+                                        </MenuItem>
+                                        <Divider></Divider>
+                                        <MenuItem
+                                        onClick={this.handleDownload}
+                                        data={{item: "download", id: obj.id}}
+                                        className="menuItem">
+                                            Herunterladen
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </div>
+                                
                             </ListItem>
                         )}
                     </List>
