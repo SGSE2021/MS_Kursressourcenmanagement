@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -18,7 +18,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { AppointmentOverview, ContentOverview, MembersOverview, FileUpload, CourseOverview } from '../pages';
-import {CreateAppointment} from '../components'
+import {CreateAppointment, UpdateAppointment} from '../components'
 
 
 const drawerWidth = 240;
@@ -170,6 +170,7 @@ function Menu(props) {
             <Route path="/courses" exact component={CourseOverview}/>
             <Route path="/courses/course/:id/appointments" exact component={AppointmentOverview} />
             <Route path="/courses/course/:id/appointments/create" exact component={CreateAppointment} />
+            <Route path="/courses/course/:id/appointments/update/:apId" exact component={UpdateAppointment} />
             <Route path="/courses/course/:id/members" exact component={MembersOverview} />
             <Route path="/courses/course/:id/" exact component={ContentOverview} />
             <Route path="/courses/course/:id/upload" exact component={FileUpload} />

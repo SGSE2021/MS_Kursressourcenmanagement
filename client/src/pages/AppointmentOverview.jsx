@@ -93,7 +93,10 @@ class AppointmentOverview extends Component {
         const iconstyle = {
             fontSize: "2.5em"
         }
-
+        const linkStyle = {
+            color: "black",
+            textDecoration: "none",
+        }
 
         if(userRole == "student") {
             return (
@@ -132,7 +135,7 @@ class AppointmentOverview extends Component {
                                             onClick={handleClick}
                                             data={{item: "Bearbeiten", id: obj.id}}
                                             className="menuItem">
-                                                Bearbeiten
+                                                <a href={"/courses/course/" + id + "/appointments/update/" + obj.id} style={linkStyle}>Bearbeiten</a>
                                             </MenuItem>
                                             <Divider></Divider>
                                             <MenuItem
