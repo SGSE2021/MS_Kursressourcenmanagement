@@ -32,7 +32,9 @@ db.once("open", () => {
 			var obj = {
 				filename: req.files.file.name,
 				course: req.params.course,
-				file: req.files.file,
+				file: req.files.file.data,
+				size: req.files.file.size,
+				mimetype: req.files.file.mimeType,
 			};
 
 			await Ressource.create(obj, (err, item) => {

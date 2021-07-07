@@ -4,14 +4,9 @@ const Schema = mongoose.Schema
 const ressourceSchema = new Schema({
     filename: String,
     course: String,
-    file: {
-        data: Buffer,
-        mimetype: String,
-        size: Number,
-        encoding: String,
-        name: String,
-        md5: String,
-    }
+    file: Buffer,
+    size: Number,
+    mimetype: String,
 });
 
 module.exports = mongoose.model('ressources', ressourceSchema)
