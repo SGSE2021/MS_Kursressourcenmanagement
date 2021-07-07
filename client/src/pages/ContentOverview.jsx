@@ -10,6 +10,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DescriptionIcon from '@material-ui/icons/Description';
 import { Divider } from '@material-ui/core';
 
+
 const Container = styled.div.attrs({
     className: 'container',
 })`
@@ -51,8 +52,10 @@ class ContentOverview extends Component {
 
         var ressourceArray = []
 
+        console.log(res.data.data)
+
         res.data.data.forEach((e) => {
-            ressourceArray.push({filename: e.filename, id: e._id, file: e.file, size: (e.file.size / 1000) + " KB"})
+            ressourceArray.push({filename: e.filename, id: e._id, file: e.file, size: (e.size / 1000) + " KB"})
         })
 
         this.setState({
@@ -69,11 +72,23 @@ class ContentOverview extends Component {
     };
 
     handleDownload = async (event, data) => {
-        console.log(data)
+        await api.getRessourceById(data.id)
+        .then((response) => {
+            const content = new Buffer.from(response.data.data.file).toString()
+            var f = new File([content], response.data.data.filename, {type: response.data.data.mimetype})
+            console.log(f)
 
-        const res = await api.getRessourceById(data.id)
+            const url = window.URL.createObjectURL(f)
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', f.name)
 
-        console.log(res.data.data.file)
+            document.body.appendChild(link)
+            link.click()
+            link.parentNode.removeChild(link)
+        })
+
+        event.preventDefault()
     }
 
     render() {
