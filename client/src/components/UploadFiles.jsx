@@ -1,5 +1,4 @@
-import React, { Component, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useRef } from "react";
 import { Button } from "@material-ui/core";
 
 const FileUploader = ({ onFileSelect }) => {

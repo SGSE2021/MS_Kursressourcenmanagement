@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Divider } from '@material-ui/core';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
@@ -54,7 +53,6 @@ class MyCoursesOverview extends Component {
 
     handleExit (event, data) {
         event.preventDefault()
-        console.log("Austreten aus Kurs: " + data.id)
     }
 
     sortAndGroupCourses(courseArray) {
@@ -113,10 +111,10 @@ class MyCoursesOverview extends Component {
                                         </ContextMenuTrigger>
                                         <ContextMenu className="contextMenu" id={c.id} style={menuStyle}>
                                         <MenuItem
-                                            onClick={this.handleEntry}
+                                            onClick={this.handleExit}
                                             data={{item: "austreten", id: c.id}}
                                             className="menuItem">
-                                                Beitreten
+                                                Austreten
                                             </MenuItem>
                                         </ContextMenu>
                                     </div></a>

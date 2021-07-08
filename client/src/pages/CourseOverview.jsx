@@ -29,9 +29,6 @@ class CourseOverview extends Component {
         }
     }
 
-    componentDidMount = async () => {
-    }
-
     handleClick(e, data) {
         if(data.btn === "findCourse"){
             this.setState({showComponent: 2})

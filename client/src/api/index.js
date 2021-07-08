@@ -10,7 +10,7 @@ export const updateAppointment = (id, payload) => api.put(`/appointment/${id}`, 
 export const deleteAppointment = id => api.delete(`/appointment/${id}`)
 export const getAppointmentById = id => api.get(`/appointment/${id}`)
 export const getAppointmentsOfCourse = name => api.get(`/appointmentsOfCourse/${name}`)
-export const uploadRessource = (name, payload) => { console.log(payload); api.post(`/ressources/${name}`, payload) }
+export const uploadRessource = (name, payload) => api.post(`/ressources/${name}`, payload)
 export const getRessources = name => api.get(`/ressources/${name}`)
 export const deleteRessource = id => api.delete(`/ressources/${id}`)
 export const getRessourceById = id => api.get(`/ressourceById/${id}`)

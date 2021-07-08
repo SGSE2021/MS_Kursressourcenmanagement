@@ -35,7 +35,7 @@ createAppointment = (req, res) => {
 
 updateAppointment = async (req, res) => {
     const body = req.body
-
+    
     if (!body) {
         return res.status(400).json({
             success: false,
@@ -50,9 +50,10 @@ updateAppointment = async (req, res) => {
                 message: 'Appointment not found!',
             })
         }
+        
         appointment.name = body.name
-        appointment
-            .save()
+        appointment.date = body.date
+        appointment.save()
             .then(() => {
                 return res.status(200).json({
                     success: true,

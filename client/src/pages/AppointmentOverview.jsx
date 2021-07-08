@@ -6,10 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Divider } from '@material-ui/core';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
 import styled from 'styled-components'
 import InfoIcon from '@material-ui/icons/Info';
-
 import ButtonMenu from '../components/AppointmentsButtonMenu'
 
 const Container = styled.div.attrs({
@@ -74,12 +72,7 @@ class AppointmentOverview extends Component {
         const { id, appointments, userRole } = this.state
         
         const handleClick = (e, data) => {
-            if(data.item === "löschen"){
-                console.log("löschen")
-            }else{
-                console.log("bearbeiten")
-                console.log(data)
-            }
+            console.log("bearbeiten")
         };
 
         const styleFullWidth = {
@@ -93,7 +86,10 @@ class AppointmentOverview extends Component {
         const iconstyle = {
             fontSize: "2.5em"
         }
-
+        const linkStyle = {
+            color: "black",
+            textDecoration: "none",
+        }
 
         if(userRole == "student") {
             return (
@@ -132,7 +128,7 @@ class AppointmentOverview extends Component {
                                             onClick={handleClick}
                                             data={{item: "Bearbeiten", id: obj.id}}
                                             className="menuItem">
-                                                Bearbeiten
+                                                <a href={"/courses/course/" + id + "/appointments/update/" + obj.id} style={linkStyle}>Bearbeiten</a>
                                             </MenuItem>
                                             <Divider></Divider>
                                             <MenuItem
@@ -152,7 +148,6 @@ class AppointmentOverview extends Component {
                 </Container>
             )
         }
-        
     }
 }
 

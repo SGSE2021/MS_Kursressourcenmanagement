@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker,  } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
 
@@ -29,15 +28,17 @@ const ButtonDiv = styled.div.attrs({
     gap: 15px;
 `
 
-class CreateAppointment extends Component {
+class UpdateAppointment extends Component {
     constructor (props){
         super(props)
         this.today = new Date()
-
+        
         this.state = {
             name: "",
-            date: new Date(),
+            formatedDate: "",
+            selectedDate: "",
             course: this.props.match.params.id,
+            appointmentId: this.props.match.params.apId,
             userRole: "prof",
         }
     }
@@ -50,44 +51,64 @@ class CreateAppointment extends Component {
     handleChangeInputDate = async event => {
         try{
             const newDate = format(event.valueOf(), "dd.MM.yyyy")
-            this.setState({date: newDate})
+            this.setState({formatedDate: newDate, selectedDate: event})
         } catch (error) {
         }
     }
     
-    handleCreateAppointment = async () => {
-        const {name, date, course} = this.state
-        const payload = {name, date, course}
+    componentDidMount = async () => {
+        const res = await api.getAppointmentById(this.props.match.params.apId)
+        var appointment = {name: res.data.data.name, date: res.data.data.date}
 
-        await api.createAppointment(payload).then(res => {
-            this.setState({
-                name: "",
-                date: ""
-            })
+        const splittedDate = appointment.date.split(".")
+        const newDate = new Date(splittedDate[2], splittedDate[1], splittedDate[0])
+
+        this.setState({
+            name: appointment.name,
+            formatedDate: appointment.date,
+            selectedDate: newDate,
         })
-        this.props.history.push(`/courses/${course}/appointments/`)
+    }
+
+    handleUpdateAppointment = async () => {
+        const {appointmentId, name, formatedDate, course} = this.state
+        const payload = {name: name, date: formatedDate, course: course}
+
+        try{
+            await api.updateAppointment(appointmentId, payload).then(res => {
+                this.setState({
+                    name: "",
+                    date: ""
+                })
+            })
+        } catch {
+
+        }finally {
+            this.props.history.push(`/courses/course/${course}/appointments/`)
+        }
+        
     }
 
     render() {
-        const { course } = this.state
+        const { name, selectedDate, course } = this.state
 
         if(this.state.userRole === "prof"){
             return (
                 <Container>
-                    <TextField display="flex" id="standard-basic" label="Terminname:" onChange={this.handleChangeInputName}/>
-                    <MuiPickersUtilsProvider  utils={DateFnsUtils}>
+                    <TextField display="flex" id="standard-basic" label="Terminname:" value={name} onChange={this.handleChangeInputName}/>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
                             margin="normal"
                             id="datePicker"
                             label="Zeitpunkt des Termins"
                             format="dd.MM.yyyy"
-                            value={this.today}
                             showTodayButton={true}
-                            onChange={date => this.handleChangeInputDate(date)}
+                            value={selectedDate}
+                            onChange={this.handleChangeInputDate}
                             />
                     </MuiPickersUtilsProvider>
                     <ButtonDiv>
-                        <Button variant="contained" color="primary" onClick={() => {this.handleCreateAppointment()}}>Speichern</Button>
+                        <Button variant="contained" color="primary" onClick={() => {this.handleUpdateAppointment()}}>Speichern</Button>
                         <Button variant="contained" color="primary" href={"/courses/course/"+ course + "/appointments/"}>Abbrechen</Button>
                     </ButtonDiv>
                 </Container>
@@ -98,4 +119,4 @@ class CreateAppointment extends Component {
     }
 }
 
-export default CreateAppointment
+export default UpdateAppointment
