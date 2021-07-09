@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kursressourcen_backend
+  name: kursressourcen-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kursressourcen_backend
+      app: kursressourcen-backend
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,12 +15,12 @@ spec:
   template:
     metadata:
       labels:
-        app: kursressourcen_backend
+        app: kursressourcen-backend
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: kursressourcen_backend
+      - name: kursressourcen-backend
         image: sgse2021containerregistry.azurecr.io/kursressourcen_backend:latest
         ports:
         - containerPort: 8000
@@ -28,9 +28,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: kursressourcen_backend
+  name: kursressourcen-backend
 spec:
   ports:
   - port: 8000
   selector:
-    app: kursressourcen_backend
+    app: kursressourcen-backend
