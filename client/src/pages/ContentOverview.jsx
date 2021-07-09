@@ -5,10 +5,11 @@ import {ContentButtonMenu} from '../components'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
+import {ContextMenu, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DescriptionIcon from '@material-ui/icons/Description';
 import { Divider } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const Container = styled.div.attrs({

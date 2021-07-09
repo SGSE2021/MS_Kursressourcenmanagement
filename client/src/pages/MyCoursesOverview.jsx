@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
+import {ContextMenu, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const Container = styled.div.attrs({
     className: 'container',
