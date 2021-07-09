@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const DB_URL = process.env.dbURL
+const DB_URL = process.env.dbURL !== undefined ? process.env.dbURL : "mongodb://localhost:27017/sgse"
 
 mongoose
     .connect(DB_URL, { useNewUrlParser: true })

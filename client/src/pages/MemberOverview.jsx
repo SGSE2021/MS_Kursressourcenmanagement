@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import api from '../api'
 import styled from 'styled-components'
 import { MembersButtonMenu } from '../components'
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -59,6 +58,8 @@ class MembersOverview extends Component {
         const { id } = this.state
         // const members = await api.getMembers(id)
         // Needs to be replaces, when connection to other Microservices is able
+        // TODO
+        
         const tmpmembersList = [
             {id: 1, firstname: "Dominik", lastname: "Löwen"},
             {id: 2, firstname: "Max", lastname: "Mustermann"},

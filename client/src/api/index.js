@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources-api/api',
 })
 
 export const createAppointment = payload => api.post(`/appointment`, payload)

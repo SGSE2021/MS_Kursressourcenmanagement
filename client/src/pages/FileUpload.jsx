@@ -3,6 +3,7 @@ import api from "../api";
 import styled from "styled-components";
 import FileUploader from "../components/UploadFiles";
 import axios from "axios";
+import { Button } from '@material-ui/core';
 const FormData = require("form-data");
 
 const Container = styled.div.attrs({
@@ -21,20 +22,31 @@ function FileUpload(props) {
 		const formData = new FormData();
 		formData.append("file", selectedFile);
 		
-		await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
+		// TODO
+
+		try {
+			await axios.post("https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources-api/api/ressources/" + props.match.params.id + "/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           });
+		} catch {
+			
+		} finally {
+			this.props.history.push(`/courses/course/${props.match.params.id}`)
+		}
+
+		
 	};
 
 	return (
 		<Container>
 			<form>
 				<FileUploader onFileSelect={(file) => setSelectedFile(file)} />
-				<button disabled={!selectedFile} onClick={(e) => submitForm(e)}>
+				<Button variant="contained" color="primary" disabled={!selectedFile} onClick={(e) => submitForm(e)}>
 					Hochladen
-				</button>
+				</Button>
+				<Button variant="contained" color="primary" href={`/courses/course/${props.match.params.id}`}></Button>
 			</form>
 		</Container>
 	);
