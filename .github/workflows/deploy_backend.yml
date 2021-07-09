@@ -12,7 +12,7 @@ env:
   IMAGE_NAME: kursressourcen_backend
   SERVICE_NAME: kursressourcen-backend
   DOCKERFILE: ./server/Dockerfile
-  MANIFESTFILE: ./manifests/kursressourcen_backend.yaml
+  MANIFESTFILE: manifests/kursressourcen_backend.yaml
 
 jobs:
   build:
