@@ -22,6 +22,8 @@ function FileUpload(props) {
 		const formData = new FormData();
 		formData.append("file", selectedFile);
 		
+		// TODO
+
 		try {
 			await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
             headers: {
@@ -31,7 +33,7 @@ function FileUpload(props) {
 		} catch {
 			
 		} finally {
-			this.props.history.push(`/resources/course/${props.match.params.id}`)
+			this.props.history.push(`/courses/course/${props.match.params.id}`)
 		}
 
 		
@@ -44,7 +46,7 @@ function FileUpload(props) {
 				<Button variant="contained" color="primary" disabled={!selectedFile} onClick={(e) => submitForm(e)}>
 					Hochladen
 				</Button>
-				<Button variant="contained" color="primary" href={`/resources/course/${props.match.params.id}`}></Button>
+				<Button variant="contained" color="primary" href={`/courses/course/${props.match.params.id}`}></Button>
 			</form>
 		</Container>
 	);

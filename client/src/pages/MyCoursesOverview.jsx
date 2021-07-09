@@ -37,7 +37,7 @@ class MyCoursesOverview extends Component {
 
     componentDidMount = async () => {
         // courses von MS_Kurse abfragen
-        // api...
+        // TODO
 
         const courseArray = [
             {id: "SGSE", dozent: "Prof. Brunsmann", semester: "Sommersemester 2021", name: "Spezielle Gebiete zum Softwareengineering"},

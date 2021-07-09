@@ -43,6 +43,8 @@ class FindCourseOverview extends Component {
     }
 
     componentDidMount = async () => {
+        // TODO
+        
         const courseArray = [
             {id: "SGSE", dozent: "Prof. Brunsmann", semester: "Sommersemester 2021", name: "Spezielle Gebiete zum Softwareengineering", major: "MIF"},
             {id: "DM", dozent: "Prof. Behrens", semester: "Sommersemester 2021", name: "Data Mining", major: "MIF"},
