@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kursressourcen-frontend 
+      app: kursressourcen-frontend
 
   strategy:
     rollingUpdate:
@@ -22,7 +22,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: kursressourcen-frontend
-        image: sgse2021containerregistry.azurecr.io/kursressourcen_frontend:latest
+        image: sgse2021cr.azurecr.io/kursressourcen_frontend:latest
         ports:
         - containerPort: 8000
 ---
