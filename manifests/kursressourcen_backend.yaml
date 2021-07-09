@@ -23,6 +23,12 @@ spec:
       containers:
       - name: kursressourcen-backend
         image: sgse2021containerregistry.azurecr.io/kursressourcen_backend:latest
+        env: 
+        - name: dbURL 
+          valueFrom: 
+            secretKeyRef: 
+              name: resourcesdb-secret 
+              key: url
         ports:
         - containerPort: 3000
 ---
