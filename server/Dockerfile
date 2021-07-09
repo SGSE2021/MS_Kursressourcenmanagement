@@ -10,7 +10,6 @@ COPY server/package*.json /usr/src/app/server/
 COPY server/ /usr/src/app/server/
 
 WORKDIR /usr/src/app/server/
-RUN ls
 RUN npm install
 
 # Bundle app source
