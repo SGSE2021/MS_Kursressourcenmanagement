@@ -22,7 +22,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: kursressourcen-backend
-        image: sgse2021containerregistry.azurecr.io/kursressourcen_backend:latest
+        image: sgse2021cr.azurecr.io/kursressourcen_backend:latest
         env: 
         - name: dbURL 
           valueFrom: 
