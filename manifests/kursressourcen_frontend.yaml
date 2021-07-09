@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kursressourcen-frontend
+      app: kursressourcen-frontend 
 
   strategy:
     rollingUpdate:
