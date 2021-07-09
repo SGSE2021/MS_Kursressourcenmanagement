@@ -4,11 +4,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Divider } from '@material-ui/core';
-import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
+import {ContextMenu, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components'
 import InfoIcon from '@material-ui/icons/Info';
 import ButtonMenu from '../components/AppointmentsButtonMenu'
+import MenuItem from '@material-ui/core/MenuItem';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -84,14 +85,15 @@ class AppointmentOverview extends Component {
             border: "1px solid"
         }
         const iconstyle = {
-            fontSize: "2.5em"
+            fontSize: "2.5em",
+            marginRight: "0.2em"
         }
         const linkStyle = {
             color: "black",
             textDecoration: "none",
         }
 
-        if(userRole == "student") {
+        if(userRole === "student") {
             return (
                 <Container>
                     <Overview>

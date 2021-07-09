@@ -110,6 +110,10 @@ function Menu(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const linkStyle = {
+      color: "white",
+      textDecoration: "none",
+    }
 
     return (
       <div className={classes.root}>
@@ -131,7 +135,7 @@ function Menu(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.menuTitle}>
-            Kurse
+            <a href="/courses/" style={linkStyle}>Kurse</a>
           </Typography>
           <div className={classes.profileDiv}>
               <AccountCircleIcon className={classes.profileButton}></AccountCircleIcon>

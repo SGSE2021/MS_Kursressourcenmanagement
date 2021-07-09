@@ -50,7 +50,7 @@ class CourseOverview extends Component {
                     <Button style={buttonstyle} variant="contained" color="primary" onClick={(e) => this.handleClick(e, {btn: "findCourse"})} >Kurse finden</Button>
                 </div>
                 <Overview>
-                    {(this.state.showComponent == 1) ? <MyCoursesOverview></MyCoursesOverview> : <FindCourseOverview></FindCourseOverview>}
+                    {(this.state.showComponent === 1) ? <MyCoursesOverview></MyCoursesOverview> : <FindCourseOverview></FindCourseOverview>}
                 </Overview>
             </Container>
         )

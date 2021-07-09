@@ -18,7 +18,7 @@ function ButtonMenu(props) {
     const classes = useStyles();
     const [userRole] = React.useState("porf");
 
-    if(userRole == "student") {
+    if(userRole === "student") {
         return (
             <div className={classes.buttonMenu}>
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid}>Inhalt</Button>
