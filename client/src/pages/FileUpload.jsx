@@ -25,7 +25,7 @@ function FileUpload(props) {
 		// TODO
 
 		try {
-			await axios.post("http://localhost:3000/api/ressources/" + props.match.params.id + "/upload", formData, {
+			await axios.post("https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources-api/api/ressources/" + props.match.params.id + "/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

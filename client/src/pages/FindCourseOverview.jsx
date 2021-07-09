@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import api from '../api'
 import styled from 'styled-components'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
