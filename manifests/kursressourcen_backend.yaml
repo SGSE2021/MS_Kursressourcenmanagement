@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kursressourcen_backend
+      app: kursressourcen_backend 
   strategy:
     rollingUpdate:
       maxSurge: 1
