@@ -23,24 +23,18 @@
 #COPY --from=build /usr/src/app/client/build /usr/share/nginx/html
 
 
-# pull official base image
-FROM node:13.12.0-alpine
-
-# set working directory
+FROM node:13.12.0-alpine as builder
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
 COPY client/package.json ./
 COPY client/package-lock.json ./
-RUN npm install
-
-# add app
+RUN npm ci --silent
+RUN npm install react-scripts@3.4.1 -g --silent
 COPY client/ ./
+RUN npm run build
 
+# production environment
+FROM nginx:stable-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
-
-# start app
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]   
