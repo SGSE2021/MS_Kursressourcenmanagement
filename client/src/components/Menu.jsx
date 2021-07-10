@@ -135,7 +135,7 @@ function Menu(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.menuTitle}>
-            <a href="/courses/" style={linkStyle}>Kurse</a>
+            <a href="/resources/" style={linkStyle}>Kurse</a>
           </Typography>
           <div className={classes.profileDiv}>
               <AccountCircleIcon className={classes.profileButton}></AccountCircleIcon>
