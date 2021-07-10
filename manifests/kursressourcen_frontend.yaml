@@ -24,7 +24,7 @@ spec:
       - name: kursressourcen-frontend
         image: sgse2021cr.azurecr.io/kursressourcen_frontend:latest
         ports:
-        - containerPort: 8000
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -32,6 +32,6 @@ metadata:
   name: kursressourcen-frontend
 spec:
   ports:
-  - port: 8000
+  - port: 80
   selector:
     app: kursressourcen-frontend
