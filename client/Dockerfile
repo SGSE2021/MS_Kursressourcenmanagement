@@ -2,6 +2,7 @@ FROM node
 
 # Create app directory
 WORKDIR /usr/src/app
+ENV PATH /usr/src/app/client/node_modules/.bin:$PATH
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
