@@ -18,7 +18,7 @@ RUN npm install react-scripts@4.0.3 -g --silent
 COPY client/ ./
 RUN npm run build
 
- production environment
+# production environment
 FROM nginx:stable-alpine
 COPY --from=builder /app/build /usr/share/nginx/html
 EXPOSE 80
