@@ -169,15 +169,15 @@ function Menu(props) {
       <main className={clsx(classes.content, {
           [classes.contentShift]: open,})}>
         <div className={classes.drawerHeader} />
-        <Router>
+        <Router basename="/resources">
           <Switch>
-            <Route path="/courses" exact component={CourseOverview}/>
-            <Route path="/courses/course/:id/appointments" exact component={AppointmentOverview} />
-            <Route path="/courses/course/:id/appointments/create" exact component={CreateAppointment} />
-            <Route path="/courses/course/:id/appointments/update/:apId" exact component={UpdateAppointment} />
-            <Route path="/courses/course/:id/members" exact component={MembersOverview} />
-            <Route path="/courses/course/:id/" exact component={ContentOverview} />
-            <Route path="/courses/course/:id/upload" exact component={FileUpload} />
+            <Route path="/" exact component={CourseOverview}/>
+            <Route path="/course/:id/appointments" exact component={AppointmentOverview} />
+            <Route path="/course/:id/appointments/create" exact component={CreateAppointment} />
+            <Route path="/course/:id/appointments/update/:apId" exact component={UpdateAppointment} />
+            <Route path="/course/:id/members" exact component={MembersOverview} />
+            <Route path="/course/:id/" exact component={ContentOverview} />
+            <Route path="/course/:id/upload" exact component={FileUpload} />
           </Switch>
         </Router>
 
