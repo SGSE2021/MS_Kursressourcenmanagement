@@ -1,9 +1,8 @@
-FROM node
+FROM node as build
 
 # Create app directory
 WORKDIR /usr/src/app
 ENV PATH /usr/src/app/client/node_modules/.bin:$PATH
-ENV PATH /usr/src/app/client/node_modules/:$PATH
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -12,8 +11,13 @@ COPY client/ /usr/src/app/client/
 
 WORKDIR /usr/src/app/client/
 RUN npm install
+RUN npm run build
 
 
-EXPOSE 8000
+FROM nginx:latest
+COPY --from=build /usr/src/app/client/build /usr/share/nginx/html
+COPY client/default.conf /etc/nginx/conf.d/default.conf
 
-ENTRYPOINT ["npm", "start"]
+EXPOSE 80
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
