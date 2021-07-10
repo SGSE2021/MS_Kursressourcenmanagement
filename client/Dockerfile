@@ -1,35 +1,20 @@
-#FROM node as build
-
-# Create app directory
+#FROM node:10.4.3
 #WORKDIR /usr/src/app
-#ENV PATH /usr/src/app/client/node_modules/.bin:$PATH
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-#COPY client/ /usr/src/app/client/
-
-#WORKDIR /usr/src/app/client/
+#COPY client/package*.json ./
+#ADD client/package.json /usr/src/app/package.json
 #RUN npm install
-#RUN npm run build
-
-
-#FROM nginx:alpine
-#COPY client/default.conf /etc/nginx/conf.d/default.conf
-#RUN apk update && apk add bash
-
+#RUN npm install react-scripts@4.0.3 -g
+#COPY client/ .
 #EXPOSE 80
+#CMD ["npm ","start"];
 
-#COPY --from=build /usr/src/app/client/build /usr/share/nginx/html
-
-
-FROM node:13.12.0-alpine as builder
+FROM node:16-alpine3.11 as builder
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY client/package.json ./
 COPY client/package-lock.json ./
 RUN npm ci --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm install react-scripts@4.0.3 -g --silent
 COPY client/ ./
 RUN npm run build
 
