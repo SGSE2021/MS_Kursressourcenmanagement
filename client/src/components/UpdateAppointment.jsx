@@ -84,7 +84,7 @@ class UpdateAppointment extends Component {
         } catch {
 
         }finally {
-            this.props.history.push(`/courses/course/${course}/appointments/`)
+            this.props.history.push(`/resources/course/${course}/appointments/`)
         }
         
     }
@@ -109,7 +109,7 @@ class UpdateAppointment extends Component {
                     </MuiPickersUtilsProvider>
                     <ButtonDiv>
                         <Button variant="contained" color="primary" onClick={() => {this.handleUpdateAppointment()}}>Speichern</Button>
-                        <Button variant="contained" color="primary" href={"/courses/course/"+ course + "/appointments/"}>Abbrechen</Button>
+                        <Button variant="contained" color="primary" href={"/resources/course/"+ course + "/appointments/"}>Abbrechen</Button>
                     </ButtonDiv>
                 </Container>
             )

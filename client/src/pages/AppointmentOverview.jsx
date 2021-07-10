@@ -130,7 +130,7 @@ class AppointmentOverview extends Component {
                                             onClick={handleClick}
                                             data={{item: "Bearbeiten", id: obj.id}}
                                             className="menuItem">
-                                                <a href={"/courses/course/" + id + "/appointments/update/" + obj.id} style={linkStyle}>Bearbeiten</a>
+                                                <a href={"/resources/course/" + id + "/appointments/update/" + obj.id} style={linkStyle}>Bearbeiten</a>
                                             </MenuItem>
                                             <Divider></Divider>
                                             <MenuItem

@@ -65,7 +65,7 @@ class CreateAppointment extends Component {
                 date: ""
             })
         })
-        this.props.history.push(`/courses/${course}/appointments/`)
+        this.props.history.push(`/resources/course/${course}/appointments/`)
     }
 
     render() {
@@ -88,7 +88,7 @@ class CreateAppointment extends Component {
                     </MuiPickersUtilsProvider>
                     <ButtonDiv>
                         <Button variant="contained" color="primary" onClick={() => {this.handleCreateAppointment()}}>Speichern</Button>
-                        <Button variant="contained" color="primary" href={"/courses/course/"+ course + "/appointments/"}>Abbrechen</Button>
+                        <Button variant="contained" color="primary" href={"/resources/course/"+ course + "/appointments/"}>Abbrechen</Button>
                     </ButtonDiv>
                 </Container>
             )

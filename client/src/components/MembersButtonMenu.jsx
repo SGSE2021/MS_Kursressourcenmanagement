@@ -19,10 +19,10 @@ function MembersButtonMenu(props) {
 
     return (
         <div className={classes.buttonMenu}>
-            <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid}>Inhalt</Button>
-            <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/appointments"}>Termine</Button>
-            <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/members"}>Mitglieder</Button>
-            <Button className={classes.buttons} variant="contained" color="primary" href={"/courses/course/" + props.courseid + "/leave"}>Austreten</Button>
+            <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/course/" + props.courseid}>Inhalt</Button>
+            <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/course/" + props.courseid + "/appointments"}>Termine</Button>
+            <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/course/" + props.courseid + "/members"}>Mitglieder</Button>
+            <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/course/" + props.courseid + "/leave"}>Austreten</Button>
         </div>
     )
 }
