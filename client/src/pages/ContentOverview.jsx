@@ -67,7 +67,6 @@ class ContentOverview extends Component {
     handleDelete = async (event, data) => {
         if (window.confirm("Datei wirklich löschen?")){
             window.location.reload()
-            console.log(data)
             await api.deleteRessource(data.id)
         }
     };
@@ -135,14 +134,12 @@ class ContentOverview extends Component {
                                     <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
                                         <MenuItem
                                         onClick={(e) => {this.handleDelete(e, {item: "löschen", id: obj.id})}}
-                                        // data={{item: "löschen", id: obj.id}}
                                         className="menuItem">
                                             Löschen
                                         </MenuItem>
                                         <Divider></Divider>
                                         <MenuItem
-                                        onClick={this.handleDownload}
-                                        data={{item: "download", id: obj.id}}
+                                        onClick={(e) => {this.handleDownload(e, {item: "download", id: obj.id})}}
                                         className="menuItem">
                                             Herunterladen
                                         </MenuItem>
