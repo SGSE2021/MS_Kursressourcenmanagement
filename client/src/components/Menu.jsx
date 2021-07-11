@@ -102,7 +102,7 @@ function Menu(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
-    const [component, setComponent] = useState(fals);
+    const [component, setComponent] = useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
