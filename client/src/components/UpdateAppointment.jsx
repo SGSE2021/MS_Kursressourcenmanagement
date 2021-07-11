@@ -71,25 +71,6 @@ class UpdateAppointment extends Component {
         })
     }
 
-    handleUpdateAppointment = async () => {
-        const {appointmentId, name, formatedDate, course} = this.state
-        const payload = {name: name, date: formatedDate, course: course}
-
-        try{
-            await api.updateAppointment(appointmentId, payload).then(res => {
-                this.setState({
-                    name: "",
-                    date: ""
-                })
-            })
-        } catch {
-
-        }finally {
-            this.props.history.push(`/#/course/${course}/appointments/`)
-        }
-        
-    }
-
     render() {
         const { name, selectedDate, course } = this.state
         var loggedUser = checkUserData()
@@ -100,6 +81,27 @@ class UpdateAppointment extends Component {
                 </Redirect>
             </Router>
         }
+
+        const handleUpdateAppointment = async () => {
+            const {appointmentId, name, formatedDate, course} = this.state
+            const payload = {name: name, date: formatedDate, course: course}
+    
+            try{
+                await api.updateAppointment(appointmentId, payload).then(res => {
+                    this.setState({
+                        name: "",
+                        date: ""
+                    })
+                })
+            } catch {
+    
+            }
+            // finally {
+            //     this.props.history.push(`/#/course/${course}/appointments/`)
+            // }
+            
+        }
+
 
         if( loggedUser.role === 3){
             return (
@@ -117,7 +119,7 @@ class UpdateAppointment extends Component {
                             />
                     </MuiPickersUtilsProvider>
                     <ButtonDiv>
-                        <Button variant="contained" color="primary" onClick={() => {this.handleUpdateAppointment()}}>Speichern</Button>
+                        <Button variant="contained" color="primary" onClick={() => {handleUpdateAppointment()}}>Speichern</Button>
                         <Button variant="contained" color="primary" href={"/resources/#/course/"+ course + "/appointments/"}>Abbrechen</Button>
                     </ButtonDiv>
                 </Container>
