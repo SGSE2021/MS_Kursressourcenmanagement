@@ -115,7 +115,7 @@ function Menu(props) {
       textDecoration: "none",
     }
 
-    if (props.loggedUser === null || props.loggedUser === undefinded) {
+    if (props.loggedUser === null || props.loggedUser === undefined) {
       return (
         <Router>
           <Redirect to="/users/" />
