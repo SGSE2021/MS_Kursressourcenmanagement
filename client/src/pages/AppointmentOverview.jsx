@@ -141,8 +141,7 @@ class AppointmentOverview extends Component {
                                             </MenuItem>
                                             <Divider></Divider>
                                             <MenuItem
-                                            onClick={this.deleteAppointment}
-                                            data={{item: "löschen", id: obj.id}}
+                                            onClick={(e) => {this.deleteAppointment(e, {item: "löschen", id: obj.id})}}
                                             className="menuItem">
                                                 Löschen
                                             </MenuItem>
