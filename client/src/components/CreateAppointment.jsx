@@ -39,8 +39,7 @@ class CreateAppointment extends Component {
         this.state = {
             name: "",
             date: new Date(),
-            course: this.props.match.params.id,
-            userRole: "prof",
+            course: this.props.match.params.id
         }
     }
 
@@ -73,7 +72,7 @@ class CreateAppointment extends Component {
     render() {
         var loggedUser = checkUserData()
         
-        if(loggedUser === null || loggedUser === undefined || loggedUser.userRole !== 3){
+        if(loggedUser === null || loggedUser === undefined || loggedUser.role !== 3){
             return (
                 <Router>
                     <Redirect to="/users/" />
@@ -83,7 +82,7 @@ class CreateAppointment extends Component {
 
         const { course } = this.state
 
-        if(loggedUser.userRole === 3){
+        if(loggedUser.role === 3){
             return (
                 <Container>
                     <TextField display="flex" id="standard-basic" label="Terminname:" onChange={this.handleChangeInputName}/>

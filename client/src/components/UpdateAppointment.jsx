@@ -40,8 +40,7 @@ class UpdateAppointment extends Component {
             formatedDate: "",
             selectedDate: "",
             course: this.props.match.params.id,
-            appointmentId: this.props.match.params.apId,
-            userRole: "prof",
+            appointmentId: this.props.match.params.apId
         }
     }
 
@@ -102,7 +101,7 @@ class UpdateAppointment extends Component {
             </Router>
         }
 
-        if( loggedUser.userRole === 3){
+        if( loggedUser.role === 3){
             return (
                 <Container>
                     <TextField display="flex" id="standard-basic" label="Terminname:" value={name} onChange={this.handleChangeInputName}/>

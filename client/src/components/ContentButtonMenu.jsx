@@ -25,9 +25,7 @@ function ContentButtonMenu(props) {
         )
     }
 
-    var loggedUser = {userRole: 3};
-
-    if(loggedUser.userRole === 3) {
+    if(loggedUser.role === 3) {
         return (
             <div className={classes.buttonMenu}>
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/course/" + props.courseid}>Inhalt</Button>

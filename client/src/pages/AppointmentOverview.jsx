@@ -100,10 +100,8 @@ class AppointmentOverview extends Component {
             color: "black",
             textDecoration: "none",
         }
-
         
-
-        if(loggedUser.userRole === 1) {
+        if(loggedUser.role === 1) {
             return (
                 <Container>
                     <Overview>
