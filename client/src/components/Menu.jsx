@@ -117,7 +117,7 @@ function Menu(props) {
     console.log(props.loggedUser)
     if (props.loggedUser === null) {
       return (
-        <Router basename="/messages">
+        <Router>
           <Redirect to="/users/" />
         </Router>
       )
