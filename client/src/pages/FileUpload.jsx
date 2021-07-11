@@ -32,15 +32,11 @@ function FileUpload(props) {
               "Content-Type": "multipart/form-data",
             },
           });
+		  
+		  console.log(props)
+		  props.history.goBack()
 		} catch {
 			
-		} finally {
-			return (
-				<Router>
-					<Redirect to={`/resources/#/course/${props.match.params.id}`}>
-					</Redirect>
-				</Router>
-			)
 		}
 	};
 
