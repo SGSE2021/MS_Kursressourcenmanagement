@@ -168,7 +168,7 @@ function Menu(props) {
         <Divider />
         <List>
         {['Startseite', 'Mail', 'Kurse', 'Stundenplan', 'Prüfungen', 'Raumbuchung', 'Ausloggen'].map((text, index) => (
-          <ListItem button key={text} href={}>
+          <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
         ))}
