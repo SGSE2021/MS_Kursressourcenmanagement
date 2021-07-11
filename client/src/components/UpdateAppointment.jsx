@@ -96,9 +96,9 @@ class UpdateAppointment extends Component {
             } catch {
     
             }
-            // finally {
-            //     this.props.history.push(`/#/course/${course}/appointments/`)
-            // }
+            finally {
+                this.props.history.push(`/#/course/${course}/appointments/`)
+            }
             
         }
 
