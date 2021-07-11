@@ -94,7 +94,8 @@ class FindCourseOverview extends Component {
         
 
         const handleMajorChange = (event) => {
-            this.state.selectedMajor = event.target.value.id
+            this.state.selectedMajor = event.target.value
+            console.log(event.target.value)
             const courseArray = this.state.courses
             const filteredCourses = []
             
@@ -135,7 +136,7 @@ class FindCourseOverview extends Component {
                 value={selectedMajor}
                 onChange={handleMajorChange}>
                     {majors.map(obj => 
-                        <MenuItem key={obj.id} value={obj}>{obj.degree + " " + obj.name}</MenuItem>
+                        <MenuItem key={obj.id} value={obj.degree + " " + obj.name}>{obj.degree + " " + obj.name}</MenuItem>
                     )}
                 </Select>
 
