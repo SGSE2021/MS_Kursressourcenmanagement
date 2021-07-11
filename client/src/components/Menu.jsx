@@ -177,15 +177,15 @@ function Menu(props) {
       <main className={clsx(classes.content, {
           [classes.contentShift]: open,})}>
         <div className={classes.drawerHeader} />
-        <Router basename="/resources">
+        <Router>
           <Switch>
-            <Route path="/" exact component={CourseOverview}/>
-            <Route path={`${process.env.PUBLIC_URL}/course/:id/appointments`} exact component={AppointmentOverview} />
-            <Route path={`${process.env.PUBLIC_URL}/course/:id/appointments/create`} exact component={CreateAppointment} />
-            <Route path={`${process.env.PUBLIC_URL}/course/:id/appointments/update/:apId`} exact component={UpdateAppointment} />
-            <Route path={`${process.env.PUBLIC_URL}/course/:id/members`} exact component={MembersOverview} />
-            <Route path={`${process.env.PUBLIC_URL}/course/:id/`} exact component={ContentOverview} />
-            <Route path={`${process.env.PUBLIC_URL}/course/:id/upload`} exact component={FileUpload} />
+            <Route path="/resources/" exact component={CourseOverview}/>
+            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/appointments`} exact component={AppointmentOverview} />
+            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/appointments/create`} exact component={CreateAppointment} />
+            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/appointments/update/:apId`} exact component={UpdateAppointment} />
+            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/members`} exact component={MembersOverview} />
+            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/`} exact component={ContentOverview} />
+            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/upload`} exact component={FileUpload} />
           </Switch>
         </Router>
 
