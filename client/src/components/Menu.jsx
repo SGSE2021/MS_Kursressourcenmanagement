@@ -123,16 +123,6 @@ function Menu(props) {
       )
     }
 
-    const drawerButtonArray = [
-      {text: 'Startseite', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/"},
-      {text: 'Mail', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/messages/"},
-      {text: 'Kurse', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/"},
-      {text: 'Stundenplan', link: "/"},
-      {text: 'Prüfungen', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/exams/"},
-      {text: 'Raumbuchung', link: "/"},
-      {text: 'Ausloggen', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/"}
-    ]
-
     return (
       <div className={classes.root}>
       <CssBaseline />
@@ -177,9 +167,9 @@ function Menu(props) {
         </div>
         <Divider />
         <List>
-        {drawerButtonArray.map((obj) => (
-          <ListItem button key={obj.text} href={obj.link}>
-            <ListItemText primary={obj.text} />
+        {['Startseite', 'Mail', 'Kurse', 'Stundenplan', 'Prüfungen', 'Raumbuchung', 'Ausloggen'].map((text, index) => (
+          <ListItem button key={text} href={}>
+            <ListItemText primary={text} />
           </ListItem>
         ))}
         </List>
