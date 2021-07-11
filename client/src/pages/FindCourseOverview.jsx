@@ -94,7 +94,7 @@ class FindCourseOverview extends Component {
         
 
         const handleMajorChange = (event) => {
-            this.state.setState({selectedMajor: event.target.value})
+            this.state.selectedMajor = event.target.value
             const courseArray = this.state.courses
             const filteredCourses = []
             
