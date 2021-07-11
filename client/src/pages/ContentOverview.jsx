@@ -65,7 +65,7 @@ class ContentOverview extends Component {
     }
 
     handleDelete = async (event, data) => {
-        if (window.confirm("Termin wirklich löschen?")){
+        if (window.confirm("Datei wirklich löschen?")){
             window.location.reload()
             console.log(data)
             await api.deleteRessource(data.id)
