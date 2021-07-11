@@ -123,15 +123,18 @@ function Menu(props) {
       )
     }
 
-    const drawerButtonArray = [
-      {text: 'Startseite', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/"},
-      {text: 'Mail', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/messages/"},
-      {text: 'Kurse', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/"},
-      {text: 'Stundenplan', link: "/"},
-      {text: 'Prüfungen', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/exams/"},
-      {text: 'Raumbuchung', link: "/"},
-      {text: 'Ausloggen', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/"}
-    ]
+    const renderAdminUserItems = (role) => {
+      if (role === 2) {
+        return <div>
+          <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/students" button key={'Studierende'}>
+            <ListItemText primary={'Studierende'} />
+          </ListItem>
+          <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/lecturers" button key={'Lehrende'}>
+            <ListItemText primary={'Lehrende'} />
+          </ListItem>
+        </div>
+      }
+    }
 
     return (
       <div className={classes.root}>
@@ -176,13 +179,31 @@ function Menu(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-        {drawerButtonArray.map((obj) => (
-          <ListItem button key={obj.text} href={obj.link}>
-            <ListItemText primary={obj.text} />
-          </ListItem>
-        ))}
-        </List>
+        <Router>
+          <List>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/" button key={'Startseite'}>
+              <ListItemText primary={'Startseite'} />
+            </ListItem>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/messages/" button key={'Nachrichten'}>
+              <ListItemText primary={'Nachrichten'} />
+            </ListItem>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses/" button key={'Kurse'}>
+              <ListItemText primary={'Kurse'} />
+            </ListItem>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/exams/" button key={'Prüfungen'}>
+              <ListItemText primary={'Prüfungen'} />
+            </ListItem>
+            {
+              renderAdminUserItems(props.loggedUser.role)
+            }
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/" button key={'Raumbelegung'}>
+              <ListItemText primary={'Raumbelegung'} />
+            </ListItem>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/login/" button key={'Ausloggen'}>
+              <ListItemText primary={'Ausloggen'} />
+            </ListItem>
+          </List>
+        </Router>
       </Drawer>
       <main className={clsx(classes.content, {
           [classes.contentShift]: open,})}>
