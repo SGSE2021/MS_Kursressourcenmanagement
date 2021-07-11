@@ -147,7 +147,7 @@ function Menu(props) {
           </Typography>
           <div className={classes.profileDiv}>
               <IconButton href="/users/settings"><AccountCircleIcon className={classes.profileButton}></AccountCircleIcon></IconButton>
-              <p>{props.loggedUser.firstname + props.loggedUser.lastname}</p>
+              <p>{props.loggedUser.firstname + " " + props.loggedUser.lastname}</p>
           </div>
         </Toolbar>
       </AppBar>
