@@ -97,8 +97,7 @@ class UpdateAppointment extends Component {
     
             }
             finally {
-                console.log(this.props.history)
-                this.props.history.goBack() // push(`/#/course/${course}/appointments/`)
+                this.props.history.goBack()
             }
             
         }
