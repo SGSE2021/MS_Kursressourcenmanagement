@@ -180,12 +180,12 @@ function Menu(props) {
         <Router basename="/resources">
           <Switch>
             <Route path="/" exact component={CourseOverview}/>
-            <Route path="/course/:id/appointments" exact component={AppointmentOverview} />
-            <Route path="/course/:id/appointments/create" exact component={CreateAppointment} />
-            <Route path="/course/:id/appointments/update/:apId" exact component={UpdateAppointment} />
-            <Route path="/course/:id/members" exact component={MembersOverview} />
-            <Route path="/course/:id/" exact component={ContentOverview} />
-            <Route path="/course/:id/upload" exact component={FileUpload} />
+            <Route path={`${process.env.PUBLIC_URL}/course/:id/appointments`} exact component={AppointmentOverview} />
+            <Route path={`${process.env.PUBLIC_URL}/course/:id/appointments/create`} exact component={CreateAppointment} />
+            <Route path={`${process.env.PUBLIC_URL}/course/:id/appointments/update/:apId`} exact component={UpdateAppointment} />
+            <Route path={`${process.env.PUBLIC_URL}/course/:id/members`} exact component={MembersOverview} />
+            <Route path={`${process.env.PUBLIC_URL}/course/:id/`} exact component={ContentOverview} />
+            <Route path={`${process.env.PUBLIC_URL}/course/:id/upload`} exact component={FileUpload} />
           </Switch>
         </Router>
 
