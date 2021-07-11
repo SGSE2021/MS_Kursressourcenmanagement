@@ -11,7 +11,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import { Divider } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import checkUserData from '../checkUserData'
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Redirect } from 'react-router-dom';
 
 
 const Container = styled.div.attrs({

@@ -11,7 +11,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import ButtonMenu from '../components/AppointmentsButtonMenu'
 import MenuItem from '@material-ui/core/MenuItem';
 import checkUserData from '../checkUserData'
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Redirect } from 'react-router-dom';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -137,7 +137,7 @@ class AppointmentOverview extends Component {
                                             <MenuItem
                                             data={{item: "Bearbeiten", id: obj.id}}
                                             className="menuItem">
-                                                <a href={"/resources/course/" + id + "/appointments/update/" + obj.id} style={linkStyle}>Bearbeiten</a>
+                                                <a href={"/resources/#/course/" + id + "/appointments/update/" + obj.id} style={linkStyle}>Bearbeiten</a>
                                             </MenuItem>
                                             <Divider></Divider>
                                             <MenuItem

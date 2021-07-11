@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FileUploader from "../components/UploadFiles";
 import axios from "axios";
 import { Button } from '@material-ui/core';
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
+import { HashRouter as Router, Redirect } from "react-router-dom";
 
 const FormData = require("form-data");
 
@@ -37,7 +37,7 @@ function FileUpload(props) {
 		} finally {
 			return (
 				<Router>
-					<Redirect to={`/resources/course/${props.match.params.id}`}>
+					<Redirect to={`/resources/#/course/${props.match.params.id}`}>
 					</Redirect>
 				</Router>
 			)
@@ -54,7 +54,7 @@ function FileUpload(props) {
 				<Button variant="contained" color="primary" disabled={!selectedFile} onClick={(e) => submitForm(e)}>
 					Hochladen
 				</Button>
-				<Button style={btnStyle} variant="contained" color="primary" href={`/resources/course/${props.match.params.id}`}>Abbrechen</Button>
+				<Button style={btnStyle} variant="contained" color="primary" href={`/resources/#/course/${props.match.params.id}`}>Abbrechen</Button>
 			</form>
 		</Container>
 	);

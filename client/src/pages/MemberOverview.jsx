@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { MembersButtonMenu } from '../components'
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import checkUserData from '../checkUserData'
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Redirect } from 'react-router-dom';
 
 const Container = styled.div.attrs({
     className: 'container',

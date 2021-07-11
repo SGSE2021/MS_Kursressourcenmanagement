@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker,  } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import checkUserData from '../checkUserData'
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Redirect } from 'react-router-dom';
 
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
@@ -66,7 +66,7 @@ class CreateAppointment extends Component {
                 date: ""
             })
         })
-        this.props.history.push(`/resources/course/${course}/appointments/`)
+        this.props.history.push(`/resources/#/course/${course}/appointments/`)
     }
 
     render() {
@@ -99,7 +99,7 @@ class CreateAppointment extends Component {
                     </MuiPickersUtilsProvider>
                     <ButtonDiv>
                         <Button variant="contained" color="primary" onClick={() => {this.handleCreateAppointment()}}>Speichern</Button>
-                        <Button variant="contained" color="primary" href={"/resources/course/"+ course + "/appointments/"}>Abbrechen</Button>
+                        <Button variant="contained" color="primary" href={"/resources/#/course/"+ course + "/appointments/"}>Abbrechen</Button>
                     </ButtonDiv>
                 </Container>
             )

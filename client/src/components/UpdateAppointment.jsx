@@ -7,7 +7,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
 import checkUserData from '../checkUserData'
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Redirect } from 'react-router-dom';
 
 
 const Container = styled.div.attrs({
@@ -85,7 +85,7 @@ class UpdateAppointment extends Component {
         } catch {
 
         }finally {
-            this.props.history.push(`/resources/course/${course}/appointments/`)
+            this.props.history.push(`/resources/#/course/${course}/appointments/`)
         }
         
     }
@@ -118,7 +118,7 @@ class UpdateAppointment extends Component {
                     </MuiPickersUtilsProvider>
                     <ButtonDiv>
                         <Button variant="contained" color="primary" onClick={() => {this.handleUpdateAppointment()}}>Speichern</Button>
-                        <Button variant="contained" color="primary" href={"/resources/course/"+ course + "/appointments/"}>Abbrechen</Button>
+                        <Button variant="contained" color="primary" href={"/resources/#/course/"+ course + "/appointments/"}>Abbrechen</Button>
                     </ButtonDiv>
                 </Container>
             )

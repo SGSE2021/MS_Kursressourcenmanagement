@@ -103,7 +103,7 @@ class MyCoursesOverview extends Component {
                             {obj.data.map(c => 
                                 <ListItem button 
                                 key={c.id}>
-                                    <a style={linkStyle} href={"/resources/course/" + c.id}><div style={styleFullWidth}>
+                                    <a style={linkStyle} href={"/resources/#/course/" + c.id}><div style={styleFullWidth}>
                                         <ContextMenuTrigger id={c.id}>
                                             <ContextContainer>
                                                 <ListItemText primary={c.name + " - " + c.dozent + " - " + c.semester}/>
