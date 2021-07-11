@@ -8,6 +8,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import axios from 'axios';
 
 
 const Container = styled.div.attrs({
@@ -54,10 +55,16 @@ class FindCourseOverview extends Component {
             {id: "PM", dozent: "Gips", semester: "Sommersemester 2020/21", name: "Programmiermethoden", major: "INF"},
         ]
 
-        const majorsArray = [
-            {id: "INF", name: "Bachelor Informatik"},
-            {id: "MIF", name: "Master Informatik"},
-        ]
+        var majorsArray = []
+
+        try {
+			var res = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/studycourses");
+            res.data.forEach((e) => {
+                majorsArray.push(e)
+            })
+
+		} catch {
+		}
 
         this.setState({
             courses: courseArray,
@@ -128,7 +135,7 @@ class FindCourseOverview extends Component {
                 value={selectedMajor}
                 onChange={handleMajorChange}>
                     {majors.map(obj => 
-                        <MenuItem key={obj.id} value={obj}>{obj.name}</MenuItem>
+                        <MenuItem key={obj.id} value={obj}>{obj.degree + " " + obj.name}</MenuItem>
                     )}
                 </Select>
 
