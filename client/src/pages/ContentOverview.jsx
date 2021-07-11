@@ -134,8 +134,8 @@ class ContentOverview extends Component {
                                     </ContextMenuTrigger>
                                     <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
                                         <MenuItem
-                                        onClick={this.handleDelete}
-                                        data={{item: "löschen", id: obj.id}}
+                                        onClick={(e) => {this.handleDelete(e, {item: "löschen", id: obj.id})}}
+                                        // data={{item: "löschen", id: obj.id}}
                                         className="menuItem">
                                             Löschen
                                         </MenuItem>
