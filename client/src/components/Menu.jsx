@@ -15,7 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import { AppointmentOverview, ContentOverview, MembersOverview, FileUpload, CourseOverview } from '../pages';
 import {CreateAppointment, UpdateAppointment} from '../components'
@@ -102,6 +102,7 @@ function Menu(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [component, setComponent] = useState(fals);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -121,6 +122,14 @@ function Menu(props) {
           <Redirect to="/users/" />
         </Router>
       )
+    }
+
+    const getComponent = () => {
+      if (component === 0) {
+        return (<CourseOverview></CourseOverview>)
+      } else if(component === 1) {
+        return (<AppointmentOverview></AppointmentOverview>)
+      }
     }
 
     return (
@@ -177,6 +186,7 @@ function Menu(props) {
       <main className={clsx(classes.content, {
           [classes.contentShift]: open,})}>
         <div className={classes.drawerHeader} />
+
         <Router basename="/resources">
           <Switch>
             <Route path="/" exact component={CourseOverview}/>
