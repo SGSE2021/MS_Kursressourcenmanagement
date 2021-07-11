@@ -102,7 +102,6 @@ function Menu(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
-    const [component, setComponent] = useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -124,13 +123,15 @@ function Menu(props) {
       )
     }
 
-    const getComponent = () => {
-      if (component === 0) {
-        return (<CourseOverview></CourseOverview>)
-      } else if(component === 1) {
-        return (<AppointmentOverview></AppointmentOverview>)
-      }
-    }
+    const drawerButtonArray = [
+      {text: 'Startseite', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/"},
+      {text: 'Mail', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/messages/"},
+      {text: 'Kurse', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/"},
+      {text: 'Stundenplan', link: "/"},
+      {text: 'Prüfungen', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/exams/"},
+      {text: 'Raumbuchung', link: "/"},
+      {text: 'Ausloggen', link: "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/"}
+    ]
 
     return (
       <div className={classes.root}>
@@ -176,9 +177,9 @@ function Menu(props) {
         </div>
         <Divider />
         <List>
-        {['Startseite', 'Mail', 'Kurse', 'Stundenplan', 'Prüfungen', 'Raumbuchung', 'Ausloggen'].map((text, index) => (
-          <ListItem button key={text} >
-            <ListItemText primary={text} />
+        {drawerButtonArray.map((obj) => (
+          <ListItem button key={obj.text} href={obj.link}>
+            <ListItemText primary={obj.text} />
           </ListItem>
         ))}
         </List>
