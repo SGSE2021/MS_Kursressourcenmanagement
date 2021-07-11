@@ -114,8 +114,8 @@ function Menu(props) {
       color: "white",
       textDecoration: "none",
     }
-    console.log(props.loggedUser)
-    if (props.loggedUser === null) {
+
+    if (props.loggedUser === null || props.loggedUser === undefinded) {
       return (
         <Router>
           <Redirect to="/users/" />
@@ -146,8 +146,8 @@ function Menu(props) {
             <a href="/resources/" style={linkStyle}>Kurse</a>
           </Typography>
           <div className={classes.profileDiv}>
-              <AccountCircleIcon className={classes.profileButton}></AccountCircleIcon>
-              <p>Dominik Löwen</p>
+              <IconButton href="/users/settings"><AccountCircleIcon className={classes.profileButton}></AccountCircleIcon></IconButton>
+              <p>{props.loggedUser.firstname + props.loggedUser.lastname}</p>
           </div>
         </Toolbar>
       </AppBar>
