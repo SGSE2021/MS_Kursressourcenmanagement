@@ -187,7 +187,7 @@ function Menu(props) {
             <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/messages/" button key={'Nachrichten'}>
               <ListItemText primary={'Nachrichten'} />
             </ListItem>
-            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses/" button key={'Kurse'}>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/" button key={'Kurse'}>
               <ListItemText primary={'Kurse'} />
             </ListItem>
             <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/exams/" button key={'Prüfungen'}>
