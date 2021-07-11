@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Menu } from '../components'
 
-function App() {
+function App(props) {
     return (
-        <Menu></Menu>
+        <Menu loggedUser={props.loggedUser}></Menu>
     );
 } 
 

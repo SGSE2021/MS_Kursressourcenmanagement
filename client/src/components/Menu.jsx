@@ -114,6 +114,14 @@ function Menu(props) {
       color: "white",
       textDecoration: "none",
     }
+    console.log(props.loggedUser)
+    if (props.loggedUser === null) {
+      return (
+        <Router basename="/messages">
+          <Redirect to="/users/" />
+        </Router>
+      )
+    }
 
     return (
       <div className={classes.root}>
