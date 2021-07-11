@@ -6,6 +6,8 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker,  } from '@material-ui/pick
 import DateFnsUtils from '@date-io/date-fns';
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
+import checkUserData from '../checkUserData'
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 
 const Container = styled.div.attrs({
@@ -91,8 +93,16 @@ class UpdateAppointment extends Component {
 
     render() {
         const { name, selectedDate, course } = this.state
+        var loggedUser = checkUserData()
 
-        if(this.state.userRole === "prof"){
+        if(loggedUser === null || loggedUser === undefined){
+            <Router>
+                <Redirect to={`/users/`}>
+                </Redirect>
+            </Router>
+        }
+
+        if( loggedUser.userRole === 3){
             return (
                 <Container>
                     <TextField display="flex" id="standard-basic" label="Terminname:" value={name} onChange={this.handleChangeInputName}/>

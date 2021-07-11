@@ -180,12 +180,12 @@ function Menu(props) {
         <Router>
           <Switch>
             <Route path="/resources/" exact component={CourseOverview}/>
-            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/appointments`} exact component={AppointmentOverview} />
-            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/appointments/create`} exact component={CreateAppointment} />
-            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/appointments/update/:apId`} exact component={UpdateAppointment} />
-            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/members`} exact component={MembersOverview} />
-            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/`} exact component={ContentOverview} />
-            <Route path={`https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/course/:id/upload`} exact component={FileUpload} />
+            <Route path={`/resources/course/:id/appointments`} exact component={AppointmentOverview} />
+            <Route path={`/resources/course/:id/appointments/create`} exact component={CreateAppointment} />
+            <Route path={`/resources/course/:id/appointments/update/:apId`} exact component={UpdateAppointment} />
+            <Route path={`/resources/course/:id/members`} exact component={MembersOverview} />
+            <Route path={`/resources/course/:id/`} exact component={ContentOverview} />
+            <Route path={`/resources/course/:id/upload`} exact component={FileUpload} />
           </Switch>
         </Router>
 

@@ -10,6 +10,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DescriptionIcon from '@material-ui/icons/Description';
 import { Divider } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
+import checkUserData from '../checkUserData'
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 
 const Container = styled.div.attrs({
@@ -90,6 +92,17 @@ class ContentOverview extends Component {
 
     render() {
         const { id, ressources } = this.state
+        var loggedUser = checkUserData()
+
+        if(loggedUser === null || loggedUser === undefined){
+            return (
+                <Router>
+                    <Redirect to={`/users/`}>
+                    </Redirect>
+                </Router>
+            )
+        }
+
 
         const styleFullWidth = {
             width: "100%",
@@ -102,7 +115,7 @@ class ContentOverview extends Component {
         const iconstyle = {
             fontSize: "3.5em"
         }
-
+        
         return (
             <Container>
                 <Overview> 
@@ -134,13 +147,11 @@ class ContentOverview extends Component {
                                         </MenuItem>
                                     </ContextMenu>
                                 </div>
-                                
                             </ListItem>
                         )}
                     </List>
                 </Overview>
-                
-                <ContentButtonMenu courseid={id}>
+                    <ContentButtonMenu courseid={id}>
                 </ContentButtonMenu>
             </Container>
         )

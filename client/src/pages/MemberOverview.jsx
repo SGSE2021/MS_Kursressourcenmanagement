@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { MembersButtonMenu } from '../components'
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import checkUserData from '../checkUserData'
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -89,20 +91,35 @@ class MembersOverview extends Component {
 
     render() {
         const { id, members } = this.state
+        var loggedUser = checkUserData()
+
+        if(loggedUser === null || loggedUser === undefined){
+            return (
+                <Router>
+                    <Redirect to="/users/" />
+                </Router>
+            )
+        }
+
+        if(loggedUser !== null && loggedUser !== undefined){
+            return (
+                <Container>
+                    <Overview>
+                        {members.map(obj => 
+                            <MemberContainer key={obj.id}>
+                                <ProfileIcon><AccountBoxIcon fontSize="inherit"></AccountBoxIcon></ProfileIcon>
+                                <NameTagInMember>{obj.firstname} {obj.lastname}</NameTagInMember>
+                            </MemberContainer>
+                        )}
+                    </Overview>
+                    <MembersButtonMenu courseid={id}> 
+                    </MembersButtonMenu>
+                </Container>
+            )
+        }
 
         return (
-            <Container>
-                <Overview>
-                    {members.map(obj => 
-                        <MemberContainer key={obj.id}>
-                            <ProfileIcon><AccountBoxIcon fontSize="inherit"></AccountBoxIcon></ProfileIcon>
-                            <NameTagInMember>{obj.firstname} {obj.lastname}</NameTagInMember>
-                        </MemberContainer>
-                    )}
-                </Overview>
-                <MembersButtonMenu courseid={id}> 
-                </MembersButtonMenu>
-            </Container>
+            <div></div>
         )
     }
 }

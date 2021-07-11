@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import { MuiPickersUtilsProvider, KeyboardDatePicker,  } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import checkUserData from '../checkUserData'
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import { Button } from '@material-ui/core';
 import { format } from 'date-fns/esm';
@@ -69,9 +71,19 @@ class CreateAppointment extends Component {
     }
 
     render() {
+        var loggedUser = checkUserData()
+        
+        if(loggedUser === null || loggedUser === undefined || loggedUser.userRole !== 3){
+            return (
+                <Router>
+                    <Redirect to="/users/" />
+                </Router>
+            )
+        }
+
         const { course } = this.state
 
-        if(this.state.userRole === "prof"){
+        if(loggedUser.userRole === 3){
             return (
                 <Container>
                     <TextField display="flex" id="standard-basic" label="Terminname:" onChange={this.handleChangeInputName}/>
@@ -93,7 +105,9 @@ class CreateAppointment extends Component {
                 </Container>
             )
         }else{
-            <Container>Keine Rechte für Studenten</Container>
+            return (
+                <Container>Keine Rechte für Studenten</Container>
+            )
         }
     }
 }

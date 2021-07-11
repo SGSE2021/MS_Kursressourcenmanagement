@@ -41,7 +41,7 @@ class CourseOverview extends Component {
         const buttonstyle = {
             marginRight: "0.5em",
         }
-
+        
         return (
             <Container>
                 <h2>Übersicht</h2>
