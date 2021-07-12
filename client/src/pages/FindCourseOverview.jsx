@@ -92,6 +92,8 @@ class FindCourseOverview extends Component {
 
         try {
             var members = data.course.persons.split(",")
+            console.log(members)
+            console.log(loggedUser.uid.toString())
             var foundUser = members.find(el => el === loggedUser.uid.toString())
             console.log(foundUser)
             if ( foundUser !== null || foundUser !== undefined ){
