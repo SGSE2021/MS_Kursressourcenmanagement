@@ -80,7 +80,6 @@ class MyCoursesOverview extends Component {
 		} catch {
 		}
 
-        // const sortedCourses = this.sortAndGroupCourses(courseArray)
         this.setState({
             courses: courseArray
         })
@@ -88,26 +87,24 @@ class MyCoursesOverview extends Component {
 
     handleExit (event, data) {
         event.preventDefault()
+        var loggedUser = checkUserData()
+
+        try {
+            var members = data.course.c.persons.split(",")
+            var foundUserIndex = members.findIndex(el => el === loggedUser.uid.toString())
+            if ( foundUserIndex !== undefined ){
+                members.splice(foundUserIndex, 1)
+                var memberString = members.toString()
+                data.course.c.persons = memberString
+
+                axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", data.course.c)
+                window.location.reload()
+            }else{
+                window.location.reload()
+            }
+        } catch {
+        }
     }
-
-    // sortAndGroupCourses(courseArray) {
-    //     const courses = courseArray
-    //     var result = [], i = 0, val, index, values = []
-        
-    //     for(; i < courses.length; i++){
-    //         val = courses[i].semester
-    //         index = values.indexOf(val)
-
-    //         if (index > -1) {
-    //             result[index].data.push(courses[i]);
-    //         } else {
-    //             values.push(val);
-    //             result.push({semester: val, data: [courses[i]]});
-    //         }
-    //     }
-
-    //     return result
-    // }
 
     render() {
         const {courses} = this.state
@@ -132,31 +129,24 @@ class MyCoursesOverview extends Component {
             <Container>
                 <List component="nav" aria-label="courses">
                     {courses.map(obj => 
-                        // <div key={obj.semester}>
-                        //     <h3>{obj.semester}</h3>
-                        //     {obj.data.map(c => 
-                                <ListItem button 
-                                key={obj.c.id.toString()}>
-                                    <a style={linkStyle} href={"/resources/#/course/" + obj.c.id.toString()}><div style={styleFullWidth}>
-                                        <ContextMenuTrigger id={obj.c.id.toString()}>
-                                            <ContextContainer>
-                                                <ListItemText primary={obj.c.name + " - " + obj.docents}/>
-                                                <div ><MoreVertIcon></MoreVertIcon></div>
-                                            </ContextContainer>
-                                        </ContextMenuTrigger>
-                                        <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
-                                        <MenuItem
-                                            onClick={this.handleExit}
-                                            data={{item: "austreten", id: obj.c.id.toString()}}
-                                            className="menuItem">
-                                                Austreten
-                                            </MenuItem>
-                                        </ContextMenu>
-                                    </div></a>
-                                </ListItem>
-                        //     )}
-                        // </div>
-                        
+                        <ListItem button 
+                        key={obj.c.id.toString()}>
+                            <a style={linkStyle} href={"/resources/#/course/" + obj.c.id.toString()}><div style={styleFullWidth}>
+                                <ContextMenuTrigger id={obj.c.id.toString()}>
+                                    <ContextContainer>
+                                        <ListItemText primary={obj.c.name + " - " + obj.docents}/>
+                                        <div ><MoreVertIcon></MoreVertIcon></div>
+                                    </ContextContainer>
+                                </ContextMenuTrigger>
+                                <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
+                                <MenuItem
+                                    onClick={(e) => {this.handleExit(e, {item: "austreten", course: obj})}}
+                                    className="menuItem">
+                                        Austreten
+                                    </MenuItem>
+                                </ContextMenu>
+                            </div></a>
+                        </ListItem>
                     )}
                  </List>
             </Container>
