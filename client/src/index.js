@@ -6,4 +6,4 @@ import checkUserData from './checkUserData'
 ReactDOM.render(
     <App loggedUser={checkUserData()}/>,
   document.getElementById('root')
-);
+); 
