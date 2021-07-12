@@ -37,46 +37,35 @@ class FindCourseOverview extends Component {
         this.state = {
             courses: [],
             majors: [],
-            selectedMajor: "",
+            selectedMajor: {},
             filteredCourses: [],
         }
     }
 
     componentDidMount = async () => {
         // TODO
-        
-        try {
-            var courseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/")
-            console.log(courseRes)
-        }catch {
-            
-        }
-
-        const courseArray = [
-            {id: "SGSE", dozent: "Prof. Brunsmann", semester: "Sommersemester 2021", name: "Spezielle Gebiete zum Softwareengineering", major: "MIF"},
-            {id: "DM", dozent: "Prof. Behrens", semester: "Sommersemester 2021", name: "Data Mining", major: "MIF"},
-            {id: "MDBS", dozent: "Budke", semester: "Sommersemester 2021", name: "Moderne Datenbankensysteme", major: "MIF"},
-            {id: "BE", dozent: "Danzebrink", semester: "Sommersemester 2021", name: "Business Engineering und IT-Projektmanagement", major: "MIF"},
-            {id: "CB", dozent: "Gips", semester: "Wintersemester 2020/21", name: "Compilerbau", major: "MIF"},
-            {id: "ADS", dozent: "George", semester: "Sommersemester 2020/21", name: "Algorithmen und Datenstrukturen", major: "INF"},
-            {id: "PM", dozent: "Gips", semester: "Sommersemester 2020/21", name: "Programmiermethoden", major: "INF"},
-        ]
-
+        var courseArray = []
         var majorsArray = []
 
+        try {
+            var courseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/")
+            courseRes.data.forEach((e) => {
+                courseArray.push(e)
+            })
+        }catch {
+        }
         try {
 			var res = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/studycourses");
             res.data.forEach((e) => {
                 majorsArray.push(e)
             })
-
 		} catch {
 		}
 
         this.setState({
             courses: courseArray,
             majors: majorsArray,
-            selectedMajor: "",
+            selectedMajor: {},
             filteredCourses: []
         })
     }
@@ -106,7 +95,7 @@ class FindCourseOverview extends Component {
             const filteredCourses = []
             
             courseArray.forEach((obj) => {
-                if(obj.major === this.state.selectedMajor){
+                if(obj.subject === this.state.selectedMajor.id){
                     filteredCourses.push(obj)
                 }
             })
@@ -139,10 +128,10 @@ class FindCourseOverview extends Component {
                 <InputLabel id="majorSelect" style={selectStyle}>Studiengang</InputLabel>
                 <Select style={selectStyle}
                 labelId="majorSelect"
-                value={selectedMajor}
+                value={selectedMajor.name}
                 onChange={handleMajorChange}>
                     {majors.map(obj => 
-                        <MenuItem key={obj.id} value={obj.degree + " " + obj.name}>{obj.degree + " " + obj.name}</MenuItem>
+                        <MenuItem key={obj.id} value={{name: obj.degree + " " + obj.name, id: obj.id}}>{obj.degree + " " + obj.name}</MenuItem>
                     )}
                 </Select>
 
