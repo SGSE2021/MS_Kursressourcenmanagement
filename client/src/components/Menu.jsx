@@ -15,7 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
 import { AppointmentOverview, ContentOverview, MembersOverview, FileUpload, CourseOverview } from '../pages';
 import {CreateAppointment, UpdateAppointment} from '../components'
@@ -117,9 +117,9 @@ function Menu(props) {
 
     if (props.loggedUser === null || props.loggedUser === undefined) {
       return (
-        <Router>
+        <BrowserRouter>
           <Redirect to="/users/" />
-        </Router>
+        </BrowserRouter>
       )
     }
 
