@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {ContextMenu, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
+import checkUserData from '../checkUserData';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -36,19 +37,51 @@ class MyCoursesOverview extends Component {
     }
 
     componentDidMount = async () => {
-        // courses von MS_Kurse abfragen
-        // TODO
+        var courseArray = []
+        var majorsArray = []
+        var docentsArray = []
+        var loggedUser = checkUserData()
+        
+        try {
+            var courseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/")
+            var myCourses = []
+            courseRes.data.forEach((e) => {
+                if(e.docents.includes(loggedUser.id) || e.persons.includes(loggedUser.id)){
+                    myCourses.push(e)
+                }
+            })
 
-        const courseArray = [
-            {id: "SGSE", dozent: "Prof. Brunsmann", semester: "Sommersemester 2021", name: "Spezielle Gebiete zum Softwareengineering"},
-            {id: "DM", dozent: "Prof. Behrens", semester: "Sommersemester 2021", name: "Data Mining"},
-            {id: "MDBS", dozent: "Budke", semester: "Sommersemester 2021", name: "Moderne Datenbankensysteme"},
-            {id: "BE", dozent: "Danzebrink", semester: "Sommersemester 2021", name: "Business Engineering und IT-Projektmanagement"},
-        ]
+			var studyCoureseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/studycourses");
+            studyCoureseRes.data.forEach((e) => {
+                majorsArray.push(e)
+            })
+            var docentsRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/lecturers")
+            docentsRes.data.forEach((e) => {
+                docentsArray.push(e)
+            })
 
-        const sortedCourses = this.sortAndGroupCourses(courseArray)
+            myCourses.data.forEach((course) => {
+                var courseDocents = course.docents.split(",")
+                var foundCourseDocents = []
+                courseDocents.forEach((doc) => {
+                    foundCourseDocents.push(docentsArray.find(element => element.id === doc))
+                })
+
+                var docentString = ""
+                foundCourseDocents.forEach((e) =>{
+                    
+                    docentString += e.firstname + " " + e.lastname + ", "
+                })
+                docentString = docentString.substring(0, docentString.length - 2)
+
+                courseArray.push({c: course, docents: docentString})
+            })
+		} catch {
+		}
+
+        // const sortedCourses = this.sortAndGroupCourses(courseArray)
         this.setState({
-            courses: sortedCourses
+            courses: courseArray
         })
     }
 
@@ -56,24 +89,24 @@ class MyCoursesOverview extends Component {
         event.preventDefault()
     }
 
-    sortAndGroupCourses(courseArray) {
-        const courses = courseArray
-        var result = [], i = 0, val, index, values = []
+    // sortAndGroupCourses(courseArray) {
+    //     const courses = courseArray
+    //     var result = [], i = 0, val, index, values = []
         
-        for(; i < courses.length; i++){
-            val = courses[i].semester
-            index = values.indexOf(val)
+    //     for(; i < courses.length; i++){
+    //         val = courses[i].semester
+    //         index = values.indexOf(val)
 
-            if (index > -1) {
-                result[index].data.push(courses[i]);
-            } else {
-                values.push(val);
-                result.push({semester: val, data: [courses[i]]});
-            }
-        }
+    //         if (index > -1) {
+    //             result[index].data.push(courses[i]);
+    //         } else {
+    //             values.push(val);
+    //             result.push({semester: val, data: [courses[i]]});
+    //         }
+    //     }
 
-        return result
-    }
+    //     return result
+    // }
 
     render() {
         const {courses} = this.state
@@ -98,30 +131,30 @@ class MyCoursesOverview extends Component {
             <Container>
                 <List component="nav" aria-label="courses">
                     {courses.map(obj => 
-                        <div key={obj.semester}>
-                            <h3>{obj.semester}</h3>
-                            {obj.data.map(c => 
+                        // <div key={obj.semester}>
+                        //     <h3>{obj.semester}</h3>
+                        //     {obj.data.map(c => 
                                 <ListItem button 
-                                key={c.id}>
-                                    <a style={linkStyle} href={"/resources/#/course/" + c.id}><div style={styleFullWidth}>
-                                        <ContextMenuTrigger id={c.id}>
+                                key={obj.c.id.toString()}>
+                                    <a style={linkStyle} href={"/resources/#/course/" + obj.c.id.toString()}><div style={styleFullWidth}>
+                                        <ContextMenuTrigger id={obj.c.id.toString()}>
                                             <ContextContainer>
-                                                <ListItemText primary={c.name + " - " + c.dozent + " - " + c.semester}/>
+                                                <ListItemText primary={obj.c.name + " - " + obj.docents}/>
                                                 <div ><MoreVertIcon></MoreVertIcon></div>
                                             </ContextContainer>
                                         </ContextMenuTrigger>
-                                        <ContextMenu className="contextMenu" id={c.id} style={menuStyle}>
+                                        <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
                                         <MenuItem
                                             onClick={this.handleExit}
-                                            data={{item: "austreten", id: c.id}}
+                                            data={{item: "austreten", id: obj.c.id.toString()}}
                                             className="menuItem">
                                                 Austreten
                                             </MenuItem>
                                         </ContextMenu>
                                     </div></a>
                                 </ListItem>
-                            )}
-                        </div>
+                        //     )}
+                        // </div>
                         
                     )}
                  </List>
