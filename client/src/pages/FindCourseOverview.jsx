@@ -92,16 +92,15 @@ class FindCourseOverview extends Component {
 
         try {
             var members = data.course.persons.split(",")
-            console.log(data.course.persons)
             var foundUser = members.find(el => el === loggedUser.uid.toString())
             if ( foundUser !== undefined ){
                 // Redirect
             }else{
                 var memberString = data.course.persons + "," + loggedUser.uid.toString()
+                data.course.persons = memberString
+                console.log(data.course.persons)
 
-                console.log(memberString)
-
-                // var res = await axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/" + data.course.id)
+                // var res = await axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/" + data.course.id, payload)
             }
         } catch {
 
