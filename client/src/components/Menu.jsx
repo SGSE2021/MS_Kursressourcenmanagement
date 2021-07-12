@@ -117,7 +117,9 @@ function Menu(props) {
 
     if (props.loggedUser === null || props.loggedUser === undefined) {
       return (
+        <BrowserRouter>
           <Redirect to="/users/" />
+        </BrowserRouter>
       )
     }
 
