@@ -94,6 +94,7 @@ class FindCourseOverview extends Component {
             var members = data.course.persons.split(",")
             var foundUser = members.find(el => el === loggedUser.uid.toString())
             if ( foundUser !== undefined ){
+                console.log(this.props)
                 this.props.history.push("/resources/#/course/" + data.course.id)
                 
             }else{
@@ -101,6 +102,7 @@ class FindCourseOverview extends Component {
                 data.course.persons = memberString
 
                 var res = axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", data.course)
+                console.log(this.props)
                 this.props.history.push("/resources/#/course/" + data.course.id)
             }
         } catch {
