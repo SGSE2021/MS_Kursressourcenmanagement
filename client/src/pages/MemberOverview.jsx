@@ -71,13 +71,23 @@ class MembersOverview extends Component {
         var persons = course.persons.split(",")
 
         docents.forEach((e) => {
-            membersList.push(docentsArray.find(element => element.id === e))
+            var docent = docentsArray.find(element => element.id === e)
+            if(docent !== undefined){
+                membersList.push(docent)
+            }
         })
         persons.forEach((e) => {
-            membersList.push(studentsArray.find(element => element.id === e))
+            var person = studentsArray.find(element => element.id === e)
+            if(person !== undefined){
+                membersList.push(person)
+            } else {
+                var docentPerson = docentsArray.find(element => element.id === e)
+                if (docentPerson !== undefined){
+                    membersList.push(person)
+                }
+            }
         })
         
-        console.log(membersList)
         this.setState({
             members: membersList
         })
