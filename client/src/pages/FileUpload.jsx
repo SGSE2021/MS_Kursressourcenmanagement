@@ -24,8 +24,6 @@ function FileUpload(props) {
 		const formData = new FormData();
 		formData.append("file", selectedFile);
 		
-		// TODO
-
 		try {
 			await axios.post("https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources-api/api/ressources/" + props.match.params.id + "/upload", formData, {
             headers: {

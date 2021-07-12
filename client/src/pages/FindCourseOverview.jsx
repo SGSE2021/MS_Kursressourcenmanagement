@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
-
+import checkUserData from '../checkUserData';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -43,7 +43,6 @@ class FindCourseOverview extends Component {
     }
 
     componentDidMount = async () => {
-        // TODO
         var courseArray = []
         var majorsArray = []
         var docentsArray = []
@@ -86,8 +85,28 @@ class FindCourseOverview extends Component {
             filteredCourses: []
         })
     }
+
     handleEntry(e, data) {
         e.preventDefault()
+        var loggedUser = checkUserData()
+
+        try {
+            var members = data.course.persons.split(",")
+            var foundUser = members.find(el => el === loggedUser.uid.toString())
+            console.log(foundUser)
+            if ( foundUser !== null || foundUser !== undefined ){
+                // Redirect
+            }else{
+                var memberString = data.course.persons + "," + loggedUser.uid.toString()
+
+                console.log(memberString)
+
+                // var res = await axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/" + data.course.id)
+            }
+        } catch {
+
+        }
+
     }
 
     render() {
@@ -145,8 +164,7 @@ class FindCourseOverview extends Component {
                                 </ContextMenuTrigger>
                                 <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
                                 <MenuItem
-                                    onClick={this.handleEntry}
-                                    data={{item: "austreten", id: obj.c.id.toString()}}
+                                    onClick={(e) => {this.handleEntry(e, {item: "beitreten", course: obj.c})}}
                                     className="menuItem">
                                         Beitreten
                                     </MenuItem>
