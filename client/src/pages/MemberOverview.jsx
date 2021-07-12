@@ -94,11 +94,7 @@ class MembersOverview extends Component {
         var loggedUser = checkUserData()
 
         if(loggedUser === null || loggedUser === undefined){
-            return (
-                <Router>
-                    <Redirect to="/users/" />
-                </Router>
-            )
+            document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/";
         }
 
         if(loggedUser !== null && loggedUser !== undefined){

@@ -116,11 +116,7 @@ function Menu(props) {
     }
 
     if (props.loggedUser === null || props.loggedUser === undefined) {
-      return (
-        <BrowserRouter>
-          <Redirect to="/users/" />
-        </BrowserRouter>
-      )
+      document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/";
     }
 
     const renderAdminUserItems = (role) => {

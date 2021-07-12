@@ -72,12 +72,8 @@ class CreateAppointment extends Component {
     render() {
         var loggedUser = checkUserData()
         
-        if(loggedUser === null || loggedUser === undefined || loggedUser.role !== 3){
-            return (
-                <Router>
-                    <Redirect to="/users/" />
-                </Router>
-            )
+        if(loggedUser === null || loggedUser === undefined){
+            document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/";
         }
 
         const { course } = this.state
