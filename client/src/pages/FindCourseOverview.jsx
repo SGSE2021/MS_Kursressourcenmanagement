@@ -100,6 +100,7 @@ class FindCourseOverview extends Component {
                 data.course.persons = memberString
 
                 axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", data.course)
+                document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/#/";
             }
         } catch {
 
