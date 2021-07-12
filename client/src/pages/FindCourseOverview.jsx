@@ -46,19 +46,36 @@ class FindCourseOverview extends Component {
         // TODO
         var courseArray = []
         var majorsArray = []
+        var docentsArray = []
 
         try {
             var courseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/")
-            courseRes.data.forEach((e) => {
-                courseArray.push(e)
-            })
-        }catch {
-        }
-        try {
-			var res = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/studycourses");
-            res.data.forEach((e) => {
+			var studyCoureseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/studycourses");
+            studyCoureseRes.data.forEach((e) => {
                 majorsArray.push(e)
             })
+            var docentsRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/lecturers")
+            docentsRes.data.forEach((e) => {
+                docentsArray.push(e)
+            })
+
+            courseRes.data.forEach((course) => {
+                var courseDocents = course.docents.split(",")
+                var foundCourseDocents = []
+                courseDocents.forEach((doc) => {
+                    foundCourseDocents.push(docentsArray.find(element => element.id === doc))
+                })
+
+                var docentString = ""
+                foundCourseDocents.forEach((e) =>{
+                    
+                    docentString += e.firstname + " " + e.lastname + ", "
+                })
+                docentString = docentString.substring(0, docentString.length - 2)
+
+                courseArray.push({c: course, docents: docentString})
+            })
+
 		} catch {
 		}
 
@@ -95,33 +112,13 @@ class FindCourseOverview extends Component {
             const filteredCourses = []
             
             courseArray.forEach((obj) => {
-                if(obj.subject === this.state.selectedMajor.id){
-                    filteredCourses.push(obj)
+                if(obj.c.subject === this.state.selectedMajor.id){
+                    filteredCourses.push({c: obj.c, docents: obj.docents})
                 }
             })
 
-            const filteredSortedCourses = sortAndGroupCourses(filteredCourses)
-            this.setState({filteredCourses: filteredSortedCourses})
+            this.setState({filteredCourses: filteredCourses})
         };
-
-        const sortAndGroupCourses = (filteredCourses) => {
-            const courses = filteredCourses
-            var result = [], i = 0, val, index, values = []
-            
-            for(; i < courses.length; i++){
-                val = courses[i].semester
-                index = values.indexOf(val)
-
-                if (index > -1) {
-                    result[index].data.push(courses[i]);
-                } else {
-                    values.push(val);
-                    result.push({semester: val, data: [courses[i]]});
-                }
-            }
-
-            return result
-        }
 
         return (
             <Container>
@@ -137,30 +134,25 @@ class FindCourseOverview extends Component {
 
                 <List component="nav" aria-label="courses">
                     {filteredCourses.map(obj => 
-                        <div key={obj.semester}>
-                            <h3>{obj.semester}</h3>
-                            {obj.data.map(c => 
-                                <ListItem button 
-                                key={c.id}>
-                                    <div style={styleFullWidth}>
-                                        <ContextMenuTrigger id={c.id}>
-                                            <ContextContainer>
-                                                <ListItemText primary={c.name + " - " + c.dozent + " - " + c.semester}/>
-                                                <div ><MoreVertIcon></MoreVertIcon></div>
-                                            </ContextContainer>
-                                        </ContextMenuTrigger>
-                                        <ContextMenu className="contextMenu" id={c.id} style={menuStyle}>
-                                        <MenuItem
-                                            onClick={this.handleEntry}
-                                            data={{item: "austreten", id: c.id}}
-                                            className="menuItem">
-                                                Beitreten
-                                            </MenuItem>
-                                        </ContextMenu>
-                                    </div>
-                                </ListItem>
-                            )}
-                        </div>
+                        <ListItem button 
+                        key={obj.c.id.toString()}>
+                            <div style={styleFullWidth}>
+                                <ContextMenuTrigger id={obj.c.id.toString()}>
+                                    <ContextContainer>
+                                        <ListItemText primary={obj.c.name + " - " + obj.docents}/>
+                                        <div ><MoreVertIcon></MoreVertIcon></div>
+                                    </ContextContainer>
+                                </ContextMenuTrigger>
+                                <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
+                                <MenuItem
+                                    onClick={this.handleEntry}
+                                    data={{item: "austreten", id: obj.c.id.toString()}}
+                                    className="menuItem">
+                                        Beitreten
+                                    </MenuItem>
+                                </ContextMenu>
+                            </div>
+                        </ListItem>
                     )}
                  </List>
             </Container>
