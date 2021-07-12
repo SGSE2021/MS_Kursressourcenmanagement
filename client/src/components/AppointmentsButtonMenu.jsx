@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import checkUserData from '../checkUserData'
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     buttonMenu: {
@@ -24,6 +25,30 @@ function ButtonMenu(props) {
             <div></div>
         )
     }
+
+    const handleExit = async (event, data) => {
+        event.preventDefault()
+        var loggedUser =  checkUserData()
+        
+        try {
+            var res = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/" + data.courseid)
+            var course = res.data[0]
+            var members = course.persons.split(",")
+            var foundUserIndex = members.findIndex(el => el === loggedUser.uid.toString())
+            
+            if ( foundUserIndex !== -1 ){
+                members.splice(foundUserIndex, 1)
+                var memberString = members.toString()
+                course.persons = memberString
+                console.log(course)
+                axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", course)
+                window.location.reload()
+            }else{
+                window.location.reload()
+            }
+        } catch {
+        }
+    }
     
     if(loggedUser.role === 3) {
         return (
@@ -40,7 +65,7 @@ function ButtonMenu(props) {
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid}>Inhalt</Button>
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid + "/appointments"}>Termine</Button>
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid + "/members"}>Mitglieder</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid + "/leave"}>Austreten</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" onClick={(e) => handleExit(e, {courseid: props.courseid})}>Austreten</Button>
             </div>
         )
     }
