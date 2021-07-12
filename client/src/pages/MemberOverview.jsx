@@ -83,7 +83,7 @@ class MembersOverview extends Component {
             } else {
                 var docentPerson = docentsArray.find(element => element.id === e)
                 if (docentPerson !== undefined){
-                    membersList.push(person)
+                    membersList.push(docentPerson)
                 }
             }
         })
