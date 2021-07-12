@@ -89,7 +89,7 @@ class FindCourseOverview extends Component {
 
     handleEntry(e, data) {
         var loggedUser = checkUserData()
-        console.log("handleEntry")
+
         try {
             var members = data.course.persons.split(",")
             var foundUser = members.find(el => el === loggedUser.uid.toString())
@@ -162,9 +162,7 @@ class FindCourseOverview extends Component {
                                 </ContextMenuTrigger>
                                 <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
                                 <MenuItem
-                                    component={Link}
                                     onClick={(e) => {this.handleEntry(e, {item: "beitreten", course: obj.c})}}
-                                    to={"resources/#/course/" + obj.c.id}
                                     className="menuItem">
                                         Beitreten
                                     </MenuItem>
