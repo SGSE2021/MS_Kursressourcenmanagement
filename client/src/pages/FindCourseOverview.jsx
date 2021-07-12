@@ -87,7 +87,6 @@ class FindCourseOverview extends Component {
     }
 
     handleEntry(e, data) {
-        e.preventDefault()
         var loggedUser = checkUserData()
 
         try {
