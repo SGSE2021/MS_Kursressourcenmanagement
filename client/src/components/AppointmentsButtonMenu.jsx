@@ -43,8 +43,10 @@ function ButtonMenu(props) {
                 console.log(course)
                 axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", course)
                 window.location.reload()
+                document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/#/";
             }else{
                 window.location.reload()
+                document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/#/";
             }
         } catch {
         }
