@@ -77,6 +77,7 @@ class MembersOverview extends Component {
             membersList.push(studentsArray.find(element => element.id === e))
         })
         
+        console.log(membersList)
         this.setState({
             members: membersList
         })
