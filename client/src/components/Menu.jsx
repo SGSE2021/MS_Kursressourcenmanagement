@@ -117,9 +117,7 @@ function Menu(props) {
 
     if (props.loggedUser === null || props.loggedUser === undefined) {
       return (
-        <BrowserRouter>
-          <Redirect to="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/" />
-        </BrowserRouter>
+          <Redirect to="/users/" />
       )
     }
 
