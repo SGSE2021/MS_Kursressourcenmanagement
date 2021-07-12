@@ -99,7 +99,7 @@ class FindCourseOverview extends Component {
                 var memberString = data.course.persons + "," + loggedUser.uid.toString()
                 data.course.persons = memberString
 
-                var res = await axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", payload)
+                var res = axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", payload)
             }
         } catch {
 
