@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { MembersButtonMenu } from '../components'
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import checkUserData from '../checkUserData'
-import { HashRouter as Router, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -58,34 +58,27 @@ class MembersOverview extends Component {
 
     componentDidMount = async () => {
         const { id } = this.state
-        // const members = await api.getMembers(id)
-        // Needs to be replaces, when connection to other Microservices is able
-        // TODO
+        var membersList = []
+
+        var coursesRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/" + id)
+        var docentsRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/lecturers")
+        var studentsRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/students")
+        var course = coursesRes.data
+        var docentsArray = docentsRes.data
+        var studentsArray = studentsRes.data
+
+        var docents = course.docents.split(",")
+        var persons = course.persons.split(",")
+
+        docents.forEach((e) => {
+            membersList.push(docentsArray.find(element => element.id === e))
+        })
+        persons.forEach((e) => {
+            membersList.push(studentsArray.find(element => element.id === e))
+        })
         
-        const tmpmembersList = [
-            {id: 1, firstname: "Dominik", lastname: "Löwen"},
-            {id: 2, firstname: "Max", lastname: "Mustermann"},
-            {id: 3, firstname: "Alfred", lastname: "Alfredson"},
-            {id: 4, firstname: "Dennis", lastname: "Eller"},
-            {id: 5, firstname: "Ole", lastname: "Gramit"},
-            {id: 6, firstname: "Lukas", lastname: "Weidich"},
-            {id: 7, firstname: "Jonas", lastname: "Posselt"},
-            {id: 8, firstname: "Joyce Marvin", lastname: "Rafflenbeul"},
-            {id: 9, firstname: "Benjamin", lastname: "Franke"},
-            {id: 10, firstname: "Kevin", lastname: "Schima"},
-            {id: 11, firstname: "Bruce", lastname: "Wayne"},
-            {id: 12, firstname: "Peter", lastname: "Parker"},
-            {id: 13, firstname: "Tony", lastname: "Stark"},
-            {id: 14, firstname: "Manfred", lastname: "Mustermann"}]
-
-
-        // const membersArray = []
-        // members.data.data.forEach((e) => {
-        //     membersArray.push({id: e._id, name: e.name})
-        // })
-
         this.setState({
-            members: tmpmembersList
+            members: membersList
         })
     }
 
