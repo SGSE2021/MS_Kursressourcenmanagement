@@ -40,7 +40,6 @@ function ContentButtonMenu(props) {
                 members.splice(foundUserIndex, 1)
                 var memberString = members.toString()
                 course.persons = memberString
-                console.log(course)
                 axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", course)
                 window.location.reload()
                 document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/#/";

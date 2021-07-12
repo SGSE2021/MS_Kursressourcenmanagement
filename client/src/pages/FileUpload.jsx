@@ -31,7 +31,6 @@ function FileUpload(props) {
             },
           });
 		  
-		  console.log(props)
 		  props.history.goBack()
 		} catch {
 			
