@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import checkUserData from '../checkUserData';
+import { Link } from '@material-ui/core';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -88,19 +89,17 @@ class FindCourseOverview extends Component {
 
     handleEntry(e, data) {
         var loggedUser = checkUserData()
-
+        console.log("handleEntry")
         try {
             var members = data.course.persons.split(",")
             var foundUser = members.find(el => el === loggedUser.uid.toString())
             if ( foundUser !== undefined ){
-                this.props.history.goBack()
                 
             }else{
                 var memberString = data.course.persons + "," + loggedUser.uid.toString()
                 data.course.persons = memberString
 
                 axios.put("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/", data.course)
-                this.props.history.goBack()
             }
         } catch {
 
@@ -163,7 +162,9 @@ class FindCourseOverview extends Component {
                                 </ContextMenuTrigger>
                                 <ContextMenu className="contextMenu" id={obj.c.id.toString()} style={menuStyle}>
                                 <MenuItem
+                                    component={Link}
                                     onClick={(e) => {this.handleEntry(e, {item: "beitreten", course: obj.c})}}
+                                    to={"resources/#/course/" + obj.c.id}
                                     className="menuItem">
                                         Beitreten
                                     </MenuItem>
