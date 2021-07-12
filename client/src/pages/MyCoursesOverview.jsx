@@ -7,6 +7,7 @@ import {ContextMenu, ContextMenuTrigger} from "react-contextmenu";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import checkUserData from '../checkUserData';
+import axios from 'axios';
 
 const Container = styled.div.attrs({
     className: 'container',
@@ -60,7 +61,7 @@ class MyCoursesOverview extends Component {
                 docentsArray.push(e)
             })
 
-            myCourses.data.forEach((course) => {
+            myCourses.forEach((course) => {
                 var courseDocents = course.docents.split(",")
                 var foundCourseDocents = []
                 courseDocents.forEach((doc) => {
