@@ -47,7 +47,7 @@ class MyCoursesOverview extends Component {
             var courseRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/")
             var myCourses = []
             courseRes.data.forEach((e) => {
-                if(e.docents.includes(loggedUser.id) || e.persons.includes(loggedUser.id)){
+                if(e.docents.includes(loggedUser.uid) || e.persons.includes(loggedUser.uid)){
                     myCourses.push(e)
                 }
             })
