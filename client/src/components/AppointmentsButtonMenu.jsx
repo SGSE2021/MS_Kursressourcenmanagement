@@ -67,7 +67,7 @@ function ButtonMenu(props) {
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid}>Inhalt</Button>
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid + "/appointments"}>Termine</Button>
                 <Button className={classes.buttons} variant="contained" color="primary" href={"/resources/#/course/" + props.courseid + "/members"}>Mitglieder</Button>
-                <Button className={classes.buttons} variant="contained" color="primary" onClick={(e) => handleExit(e, {courseid: props.courseid})}>Austreten</Button>
+                <Button className={classes.buttons} variant="contained" color="primary" href="" onClick={(e) => handleExit(e, {courseid: props.courseid})}>Austreten</Button>
             </div>
         )
     }

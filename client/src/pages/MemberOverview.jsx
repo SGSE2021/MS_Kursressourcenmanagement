@@ -63,10 +63,13 @@ class MembersOverview extends Component {
         var coursesRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses-api/courses/" + id)
         var docentsRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/lecturers")
         var studentsRes = await axios.get("https://sgse2021-ilias.westeurope.cloudapp.azure.com/users-api/students")
+        console.log(coursesRes)
         var course = coursesRes.data
+        console.log(docentsRes)
         var docentsArray = docentsRes.data
+        console.log(studentsRes)
         var studentsArray = studentsRes.data
-
+        
         var docents = course.docents.split(",")
         var persons = course.persons.split(",")
 
