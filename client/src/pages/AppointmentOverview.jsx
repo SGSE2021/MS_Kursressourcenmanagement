@@ -74,16 +74,6 @@ class AppointmentOverview extends Component {
         const { id, appointments } = this.state
         var loggedUser = checkUserData()
 
-        if(loggedUser === null || loggedUser === undefined){
-            return (
-                <Router>
-                    <Redirect to={`/users/`}>
-                    </Redirect>
-                </Router>
-            )
-        }
-
-
         const styleFullWidth = {
             width: "100%",
         }

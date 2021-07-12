@@ -92,7 +92,7 @@ class MyCoursesOverview extends Component {
         try {
             var members = data.course.c.persons.split(",")
             var foundUserIndex = members.findIndex(el => el === loggedUser.uid.toString())
-            if ( foundUserIndex !== undefined ){
+            if ( foundUserIndex !== -1 ){
                 members.splice(foundUserIndex, 1)
                 var memberString = members.toString()
                 data.course.c.persons = memberString
