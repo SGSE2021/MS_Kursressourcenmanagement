@@ -110,6 +110,32 @@ class ContentOverview extends Component {
         const iconstyle = {
             fontSize: "3.5em"
         }
+
+        const getContextMenu = () => {
+            if(loggedUser.role === 3){
+                return <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
+                            <MenuItem
+                            onClick={(e) => {this.handleDelete(e, {item: "löschen", id: obj.id})}}
+                            className="menuItem">
+                                Löschen
+                            </MenuItem>
+                            <Divider></Divider>
+                            <MenuItem
+                            onClick={(e) => {this.handleDownload(e, {item: "download", id: obj.id})}}
+                            className="menuItem">
+                                Herunterladen
+                            </MenuItem>
+                        </ContextMenu>
+            } else {
+                return <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
+                            <MenuItem
+                            onClick={(e) => {this.handleDownload(e, {item: "download", id: obj.id})}}
+                            className="menuItem">
+                                Herunterladen
+                            </MenuItem>
+                        </ContextMenu>
+            }
+        }
         
         return (
             <Container>
@@ -126,19 +152,7 @@ class ContentOverview extends Component {
                                             <div ><MoreVertIcon></MoreVertIcon></div>
                                         </ContextContainer>
                                     </ContextMenuTrigger>
-                                    <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
-                                        <MenuItem
-                                        onClick={(e) => {this.handleDelete(e, {item: "löschen", id: obj.id})}}
-                                        className="menuItem">
-                                            Löschen
-                                        </MenuItem>
-                                        <Divider></Divider>
-                                        <MenuItem
-                                        onClick={(e) => {this.handleDownload(e, {item: "download", id: obj.id})}}
-                                        className="menuItem">
-                                            Herunterladen
-                                        </MenuItem>
-                                    </ContextMenu>
+                                    {getContextMenu()}
                                 </div>
                             </ListItem>
                         )}
