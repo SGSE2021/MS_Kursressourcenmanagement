@@ -210,7 +210,7 @@ function Menu(props) {
             {
               renderAdminUserItems(props.loggedUser.role)
             }
-            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/" button key={'Raumbelegung'}>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/booking/" button key={'Raumbelegung'}>
               <ListItemText primary={'Raumbelegung'} />
             </ListItem>
             <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/logout" button key={'Ausloggen'}>
