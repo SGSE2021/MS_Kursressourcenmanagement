@@ -95,7 +95,7 @@ class ContentOverview extends Component {
         var loggedUser = checkUserData()
 
         if(loggedUser === null || loggedUser === undefined){
-            document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/";
+            document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/login";
         }
 
 
