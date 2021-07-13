@@ -44,7 +44,7 @@ class CourseOverview extends Component {
         
         return (
             <Container>
-                <h2>Übersicht</h2>
+                <h2>{this.state.showComponent === 1 ? "Meine Kurse" : "Kurse finden"}</h2>
                 <div>
                     <Button style={buttonstyle} variant="contained" color="primary" onClick={(e) => this.handleClick(e, {btn: "myCourses"})} >Meine Kurse</Button>
                     <Button style={buttonstyle} variant="contained" color="primary" onClick={(e) => this.handleClick(e, {btn: "findCourse"})} >Kurse finden</Button>
