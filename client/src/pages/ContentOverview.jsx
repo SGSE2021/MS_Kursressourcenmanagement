@@ -111,7 +111,7 @@ class ContentOverview extends Component {
             fontSize: "3.5em"
         }
 
-        const getContextMenu = () => {
+        const getContextMenu = (obj) => {
             if(loggedUser.role === 3){
                 return <ContextMenu className="contextMenu" id={obj.id} style={menuItemStyle}>
                             <MenuItem
@@ -152,7 +152,7 @@ class ContentOverview extends Component {
                                             <div ><MoreVertIcon></MoreVertIcon></div>
                                         </ContextContainer>
                                     </ContextMenuTrigger>
-                                    {getContextMenu()}
+                                    {getContextMenu(obj)}
                                 </div>
                             </ListItem>
                         )}
