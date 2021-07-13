@@ -139,7 +139,7 @@ function Menu(props) {
             <ListItemText primary={'Kurse'} />
           </ListItem>
           <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses/appointments/" button key={'Appointments'}>
-            <ListItemText primary={'Appointments'} />
+            <ListItemText primary={'Termine'} />
           </ListItem>
         </div>
       } else {
