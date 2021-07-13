@@ -116,7 +116,7 @@ function Menu(props) {
     }
 
     if (props.loggedUser === null || props.loggedUser === undefined) {
-      document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/";
+      document.location.href = "https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/login";
     }
 
     const renderAdminUserItems = (role) => {
@@ -131,6 +131,25 @@ function Menu(props) {
         </div>
       }
     }
+
+    const getCourseOrResourceMenuItem = (role) => {
+      if(role === 2){
+        return <div>
+          <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses/courses/" button key={'Kurse'}>
+            <ListItemText primary={'Kurse'} />
+          </ListItem>
+          <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/courses/appointments/" button key={'Appointments'}>
+            <ListItemText primary={'Appointments'} />
+          </ListItem>
+        </div>
+      } else {
+        return <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/" button key={'Kurse'}>
+                   <ListItemText primary={'Kurse'} />
+                </ListItem>
+      }
+    }
+
+
 
     return (
       <div className={classes.root}>
@@ -183,9 +202,8 @@ function Menu(props) {
             <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/messages/" button key={'Nachrichten'}>
               <ListItemText primary={'Nachrichten'} />
             </ListItem>
-            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/resources/" button key={'Kurse'}>
-              <ListItemText primary={'Kurse'} />
-            </ListItem>
+            
+            {getCourseOrResourceMenuItem(props.loggedUser.role)}
             <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/exams/" button key={'Prüfungen'}>
               <ListItemText primary={'Prüfungen'} />
             </ListItem>
@@ -195,7 +213,7 @@ function Menu(props) {
             <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/" button key={'Raumbelegung'}>
               <ListItemText primary={'Raumbelegung'} />
             </ListItem>
-            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/login/" button key={'Ausloggen'}>
+            <ListItem component="a" href="https://sgse2021-ilias.westeurope.cloudapp.azure.com/users/logout" button key={'Ausloggen'}>
               <ListItemText primary={'Ausloggen'} />
             </ListItem>
           </List>
