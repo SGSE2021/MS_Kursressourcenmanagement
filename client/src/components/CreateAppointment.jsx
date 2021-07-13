@@ -58,7 +58,8 @@ class CreateAppointment extends Component {
     
     handleCreateAppointment = async () => {
         const {name, date, course} = this.state
-        const payload = {name, date, course}
+        const formattedDate = format(date.valueOf(), "dd.MM.yyyy")
+        const payload = {name, formattedDate, course}
 
         await api.createAppointment(payload).then(res => {
             this.setState({
